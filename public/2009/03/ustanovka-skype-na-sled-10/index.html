@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Установка Skype на SLED 10 - Hrafn.me</title>
+  <meta name="author" content="Alexander 'Hrafn' Ivanov">
+
+  
+  <meta name="description" content="Оригинал статьи находится на Novell Cool Solutions
+(http://www.novell.com/communities/node/2578/how-install-skype-sled-10-sp1) Проблема Не совсем &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hrafn.me/2009/03/ustanovka-skype-na-sled-10">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hrafnme" rel="alternate" title="Hrafn.me" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  <!-- Piwik --> 
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://stat.alexfinn.eu/" : "http://stat.alexfinn.eu/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 3);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://stat.alexfinn.eu/piwik.php?idsite=3" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft"></div>
+  	<div id="logoText"></div>
+  	<div id="logoRight"></div>
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">Hrafn.me</a></h1>
+  
+    <h2>...</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hrafnme" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hrafn.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/docs">Docs</a></li>
+  <li><a href="/lpi">LPI</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">Установка Skype на SLED 10</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-03T00:00:00+03:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Оригинал статьи находится на Novell Cool Solutions
+(http://www.novell.com/communities/node/2578/how-install-skype-sled-10-sp1)</p>
+
+<p><strong>Проблема</strong></p>
+
+<p>Не совсем очевидно и понятно, каким образом поставить Skype на SLED 10 SP1.</p>
+
+<!--more-->
+
+
+<p><strong>Решение</strong></p>
+
+<p>Скачать и установить статически скомпилированную версию Skype, которая
+прекрасно работает на SLED 10.</p>
+
+<p><strong>Пример</strong></p>
+
+<p>Перейдите по ссылке <a href="http://www.skype.com/intl/en/download/skype/linux/">http://www.skype.com/intl/en/download/skype/linux/</a> и выберите для скачивания
+«Static» (Static означает, что бинарник включает в себя все необходимое, в том
+числе и все нужные библиотеки). Не скачивайте rpm-пакет, предназначенный для
+openSUSE, так как он не устанавливается корректно на SLED 10 (по крайней мере,
+я пытался это сделать и у меня не работало).</p>
+
+<p>Как только вы кликните на «Static», Firefox спросит у вас, хотите вы открыть
+файл с помощью File Roller или хотите сохранить его на диск. Выберите
+сохранение на диск и сохраните на Desktop.</p>
+
+<p>Так, теперь кликните на Рабочем Столе правой клавишей и выберите «Open
+Terminal» для открытия терминала Gnome. Вы должны ввести команду ls и увидите
+файл, названный как-нибудь, типа “skype_static-1.4.0.99.tar.bz2″.
+(Прим.переводчика: я так думаю, что прежде, чем вводить ls, необходимо для
+начала перейти на Desktop). Версия может быть новее, потому вам потребуется
+скорректировать команду в таком случае).</p>
+
+<p>В терминале наберите:</p>
+
+<pre><code>    tar -jxf skype_static-1.4.0.99.tar.bz2
+</code></pre>
+
+<p>это распакует архив в папку на Рабочем Столе с именем “skype_static-1.4.0.99″.</p>
+
+<p>Наберите</p>
+
+<pre><code>    cd skype_static-1.4.0.99
+</code></pre>
+
+<p>для перехода в только что созданную папку. Теперь необходимо получить с
+помощью su для установки skype в нужное место. Итак, наберите su и напечатайте
+пароль root’а, который вы выбрали при установке системы.</p>
+
+<p>Теперь создайте папку /usr/share/skype (это место рекомендуется в README
+skype). Итак, напечатайте:</p>
+
+<pre><code>    mkdir /usr/share/skype
+</code></pre>
+
+<p>Здесь следует отметить, что согласно Linux Standards Base, skype должен быть
+расположен в /opt/skype. Если вы пожелаете создать папку именно там и создать
+ссылку с /usr/share/skype — вперед, оставим это в качестве упражнения для
+читателя.</p>
+
+<p>Если вы не считаете это удобным, просто следуйте инструкциям дальше.</p>
+
+<p>Теперь скопируйте содержимое папки, в которой вы находитесь, в
+/usr/share/skype:</p>
+
+<pre><code>    cp * /usr/share/skype
+</code></pre>
+
+<p>Затем переместите бинарник skype в /usr/bin:</p>
+
+<pre><code>    mv /usr/share/skype/skype /usr/bin
+</code></pre>
+
+<p>Сейчас вы все это выполняете как пользователь root — теперь напечатайте exit
+для возврата к аккаунту обычного пользователя.</p>
+
+<p>Не закрывайте окно, так как необходимо сделать еще один шаг.</p>
+
+<p>Теперь в качестве обычного пользователя вам необходимо запустить skype с
+терминала. Если вы хотите, чтобы на Рабочем Столе была прикольная иконка для
+Skype, скопируйте файл на ваш рабочий Стол. Например, так:</p>
+
+<pre><code>    cp /usr/share/skype/skype.desktop ~/Desktop
+</code></pre>
+
+<p>При желании, вы можете изменить использующуюся иконка на одну из расположенных
+в /usr/share/skype. Я оставлю это вам.</p>
+
+<p>Сейчас у вас должна быть установлена последняя версия Skype — поздравляю вас!</p>
+
+<p><strong>Окружение</strong></p>
+
+<ul>
+<li>SLED 10 SP1</li>
+<li>Окружение рабочего стола Gnome (но также должно аналогично работать и в KDE).</li>
+</ul>
+
+
+<p>Добавлю от себя уже. Инструкция приводится для первого сервис-пака, но думаю,
+что также прекрасно будет работать и на втором. Сам я еще не пробовал.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alexander 'Hrafn' Ivanov</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-03T00:00:00+03:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2009</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hrafn.me/2009/03/ustanovka-skype-na-sled-10" data-via="" data-counturl="http://hrafn.me/2009/03/ustanovka-skype-na-sled-10" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/2009/03/ssh-proxying" title="Previous Post: SSH Proxying">&laquo; SSH Proxying</a>
+      
+      
+        <a class="basic-alignment right articlenav" href="/2009/03/kratkij-vzglyad-na-sled-11-rc4" title="Next Post: Краткий взгляд на SLED 11 RC4">Краткий взгляд на SLED 11 RC4 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-search-and-databags">Основы Chef. Поиск и Data Bags</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-introduction-to-cookbooks">Основы Chef. Введение в "Поваренные книги"</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-core-components">Основы Chef. Базовые компоненты</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-architecture">Основы Chef. Введение в архитектуру</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/about-blog-design">Немного про дизайн</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/103291489173191931572?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Alexander 'Hrafn' Ivanov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

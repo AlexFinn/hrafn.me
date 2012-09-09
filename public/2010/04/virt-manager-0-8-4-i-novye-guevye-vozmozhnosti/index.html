@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Virt-Manager 0.8.4 и новые гуевые возможности - Hrafn.me</title>
+  <meta name="author" content="Alexander 'Hrafn' Ivanov">
+
+  
+  <meta name="description" content="Перевод статьи, написанной Haydn Solomon и посвященной выходу новой версии
+Virt-Manager. Оригинал статьи. На этой неделе вышел в свет свежий релиз &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hrafn.me/2010/04/virt-manager-0-8-4-i-novye-guevye-vozmozhnosti">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hrafnme" rel="alternate" title="Hrafn.me" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  <!-- Piwik --> 
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://stat.alexfinn.eu/" : "http://stat.alexfinn.eu/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 3);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://stat.alexfinn.eu/piwik.php?idsite=3" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft"></div>
+  	<div id="logoText"></div>
+  	<div id="logoRight"></div>
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">Hrafn.me</a></h1>
+  
+    <h2>...</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hrafnme" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hrafn.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/docs">Docs</a></li>
+  <li><a href="/lpi">LPI</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">Virt-Manager 0.8.4 и новые гуевые возможности</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-04-01T23:27:59+04:00" pubdate data-updated="true">Apr 1<span>st</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Перевод статьи, написанной Haydn Solomon и посвященной выходу новой версии
+Virt-Manager. <a href="http://www.linux-kvm.com/content/virt-manager-084-adds-new-ui-features">Оригинал статьи.</a></p>
+
+<!--more-->
+
+
+<p>На этой неделе вышел в свет свежий релиз virt-manager, 0.8.4, в котором
+появились некоторые дополнения в интерфейсе пользователя и новая
+функциональность. Часть из этих изменений направлены на устранение просчетов
+предыдущих релизов, которые были очевидны для каждого, знакомого с virt-manager. В это посте мы пройдемся по этим изменениям для получения
+представления, что в конце концов можно ждать от обновления.</p>
+
+<p><a href="/media/images/2010/04/01/virtman084_about.png"><img src="/media/images/2010/04/01/virtman084_about.png" alt="" /></a></p>
+
+<p><strong>Изменение модели сетевого устройства</strong></p>
+
+<p>Если ранее вы пользовались virt-manager, то должны знать, что в окне с
+детальным описанием ВМ есть множество параметров настройки ВМ, которые требуют
+удаления или создания заново для того, чтобы изменения применились.
+Разработчики признали, что это не удобно, и даже поместили информацию об этом
+в development roadmap. Одни из таких устройств, требующих &#8220;удаление-и-создание-заново&#8221; для настройки - сетевые устройства. При экспериментах
+пользователи меняют эти настройки постоянно. Новый релиз предлагает на выбор
+из выпадающего списка модели устройств, что сильно улучшило интерфейс по
+сравнению с предыдущими редизами. Ниже показан скриншот нового интерфейса.</p>
+
+<p><a href="/media/images/2010/04/01/virtman084_netdev.png"><img src="/media/images/2010/04/01/virtman084_netdev.png" alt="" /></a></p>
+
+<p><strong>Импорт существующего диска</strong></p>
+
+<p>Теперь при создании виртуальной машины присутствует опция, позволяющая
+испортировать существующий диск. Это дополнение фактически принуждает новую
+виртуальную машину загружаться в первую очередь с диска. Лично я нахожу, что
+такой выбор избыточным, поскольку также можно выбрать существующий диск при
+загрузке с CD-Rom при создании виртуальной машины. Ради справедливости стоит
+упомянуть, что возможность выбора порядка загрузки была лишь недавно добавлена
+в qemu-kvm, поэтому мне кажется, что в будущем интерфейс еще изменится. По
+моему мнению, новая виртуальная машина не нуждается в загрузке для настройки.
+Думаю, что должна быть опция для запрещения загрузки при первоначальном
+создании. В таком случае, была бы возможность изменения порядка загрузки и
+любые другие настройки до первой загрузки. Ниже показана новая опция.</p>
+
+<p><a href="/media/images/2010/04/01/virtman084_import.png"><img src="/media/images/2010/04/01/virtman084_import.png" alt="" /></a></p>
+
+<p><strong>Порядок устройств, с которых происходит загрузка</strong></p>
+
+<p>Как упомянуто в предыдущей части в qemu-kvm лишь недавно добавлена опция,
+позволяющая выбирать порядок устройств при загрузке. Теперь этот интерфейс
+представлен в virt-manager и показан на скриншоте чуть ниже. Я уверен, что в
+будущем диалог создания новой виртуальной машины будет обновлен для большего
+удобства использования этой опции.</p>
+
+<p><a href="/media/images/2010/04/01/virtman084_boot.png"><img src="/media/images/2010/04/01/virtman084_boot.png" alt="" /></a></p>
+
+<p><strong>Указание расшаренного сетевого устройства в качестве бриджа</strong></p>
+
+<p>В virt-manager недавно добавлена возможность настраивать бридж, как описано <a href="http://www.linux-kvm.com/content/bridged-networking-virt-manager-083">в этом посте</a>. В этом же релизе появилась возможность указывать бридж в
+качестве вашего сетевого устройства. Вы увидите эту опцию в двух местах:
+сначала в процессе создания виртуальной машины, затем при добавлении сетевого
+устройства. Ниже показана опция для добавления сетевого устройства.</p>
+
+<p><a href="/media/images/2010/04/01/virtman084_shared2.png"><img src="/media/images/2010/04/01/virtman084_shared2.png" alt="" /></a></p>
+
+<p>Ниже показана опция при создании новой виртуальной машины.</p>
+
+<p><a href="/media/images/2010/04/01/virtman084_shared3.png"><img src="/media/images/2010/04/01/virtman084_shared3.png" alt="" /></a></p>
+
+<p><strong>Поддержка слежения за устройствами</strong></p>
+
+<p>Qemu позволяет указать устройство слежения за виртуальным оборудованием.
+Виртуальное устройство включается гостем и должно периодически опрашиваться
+агентом внутри гостя или, по умолчанию, гостевая система будет перезагружена.
+Кроме сброса гостевой системы, есть возможность указать дополнительные
+дополнительные действия. Опции включают в себя остановку, отключение питания,
+пауза, отладка и отсутствие реакции. Остановка не рекомендуется, так как для
+нее требуется, чтобы гостевая система отвечала на сигналы ACPI, что может быть
+ненадежным в случае, если срок действия таймера слежения гостевой системы
+истек. Доступны две модели, ib700 и i6300esb, на основе контроллера ввода-вывода 6300esb от Intel. ib700 - более простая модель с единственным таймером.
+i6300esb отличается наличием двойного таймера слежения на основе PCI. Теперь
+эта настройка доступна в virt-manager и показана на скриншоте диалога
+&#8220;Добавление оборудования&#8221;.</p>
+
+<p><a href="/media/images/2010/04/01/virtman084_watch1.png"><img src="/media/images/2010/04/01/virtman084_watch1.png" alt="" /></a></p>
+
+<p><a href="/media/images/2010/04/01/virtman084_watch2.png"><img src="/media/images/2010/04/01/virtman084_watch2.png" alt="" /></a></p>
+
+<p><strong>Описание виртуальной машины</strong></p>
+
+<p>Еще одной незначительная вещь - возможность добавить текстовое описание
+гостевой системы во вкладке деталей под секцией обзора, показанного ниже. Я
+пока не видел, в каком месте отображается эта информацтя, но сам факт наличия
+такой информации радует.</p>
+
+<p><a href="/media/images/2010/04/01/virtman084_desc.png"><img src="/media/images/2010/04/01/virtman084_desc.png" alt="" /></a></p>
+
+<p><strong>Заключение</strong></p>
+
+<p>Релиз 0.8.4 прибавил в легкости использования и функциональности в virt-manager, сделав его более дружелюбным при работе дома и дата-центрах малого
+бизнеса. У него еще есть куда двигаться, но это продвижение проходит
+достаточно стабильно. Virt-manager также сильно зависит от других проектов,
+например, libvirt, и в конце концов qemu управляется через командную строку,
+поэтому он может делать только то, что этот (и другие) проект позволяет
+делать. Я думаю, что virt-manager  имеет большой потенциал в качестве
+графического инструмента управления &#8220;из-коробки&#8221;, в основе которого находятся
+технологии python и glade, позволяющее мгновенное создание прототипов и
+разработки.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hrafn</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-04-01T23:27:59+04:00" pubdate data-updated="true">Apr 1<span>st</span>, 2010</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hrafn.me/2010/04/virt-manager-0-8-4-i-novye-guevye-vozmozhnosti" data-via="" data-counturl="http://hrafn.me/2010/04/virt-manager-0-8-4-i-novye-guevye-vozmozhnosti" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/2010/03/specii-dlya-virtualok" title="Previous Post: Специи для виртуалок ))">&laquo; Специи для виртуалок ))</a>
+      
+      
+        <a class="basic-alignment right articlenav" href="/2010/05/kerberos-dlya-integracii-v-ad" title="Next Post: [RH Knowledgebase] Kerberos для интеграции в AD">[RH Knowledgebase] Kerberos для интеграции в AD &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-search-and-databags">Основы Chef. Поиск и Data Bags</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-introduction-to-cookbooks">Основы Chef. Введение в "Поваренные книги"</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-core-components">Основы Chef. Базовые компоненты</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-architecture">Основы Chef. Введение в архитектуру</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/about-blog-design">Немного про дизайн</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/103291489173191931572?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Alexander 'Hrafn' Ivanov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

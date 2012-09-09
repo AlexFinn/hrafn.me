@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fedora 14. Ошибка при создании виртуальной машины - Hrafn.me</title>
+  <meta name="author" content="Alexander 'Hrafn' Ivanov">
+
+  
+  <meta name="description" content="Решил я еще раз попробовать привести шрифты в openSUSE в нормальный вид.
+Ставить на ноут будучи неуверенным, что все получится до конца и завершится &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hrafn.me/2010/12/fedora-14-oshibka-pri-sozdanii-virtualnoj-mashiny">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hrafnme" rel="alternate" title="Hrafn.me" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  <!-- Piwik --> 
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://stat.alexfinn.eu/" : "http://stat.alexfinn.eu/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 3);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://stat.alexfinn.eu/piwik.php?idsite=3" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft"></div>
+  	<div id="logoText"></div>
+  	<div id="logoRight"></div>
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">Hrafn.me</a></h1>
+  
+    <h2>...</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hrafnme" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hrafn.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/docs">Docs</a></li>
+  <li><a href="/lpi">LPI</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">Fedora 14. Ошибка при создании виртуальной машины</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-12-02T15:56:18+03:00" pubdate data-updated="true">Dec 2<span>nd</span>, 2010</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Решил я еще раз попробовать привести шрифты в openSUSE в нормальный вид.
+Ставить на ноут будучи неуверенным, что все получится до конца и завершится
+удачно, у меня не было, надумал поставить дистр в виртуалке.</p>
+
+<!--more-->
+
+
+<p>Поскольку KVM я
+люблю и не люблю Virtualbox, но его и выбрал :) Создаю виртуалку, выбираю
+всякие-разные опции и в итоге получаю такое:</p>
+
+<pre><code>    Uncaught Error: Не удалось завершить установку: 'Unable to deny all devices for opensuse: No such file or directory
+    Traceback (most recent call last):
+    File "/usr/share/virt-manager/virtManager/create.py", line 1567, in do_install
+    dom = guest.start_install(False, meter = meter)
+    File "/usr/lib/python2.7/site-packages/virtinst/Guest.py", line 1023, in start_install
+    return self._do_install(consolecb, meter, removeOld, wait)
+    File "/usr/lib/python2.7/site-packages/virtinst/Guest.py", line 1088, in _do_install
+    "install")
+    File "/usr/lib/python2.7/site-packages/virtinst/Guest.py", line 1059, in _create_guest
+    dom = self.conn.createLinux(start_xml, 0)
+    File "/usr/lib64/python2.7/site-packages/libvirt.py", line 1277, in createLinux
+    if ret is None:raise libvirtError('virDomainCreateLinux() failed', conn=self)
+    libvirtError: Unable to deny all devices for opensuse: No such file or directory
+</code></pre>
+
+<p>Я считаю: &#8220;Восхитительно!&#8221; Особенно меня радует понятность описания проблемы и
+легкость поиска решения проблемы. Впрочем, virt-manager этим отличался всегда.
+Если кто-то столкнется с таким же чудом, то должно помочь следующее:</p>
+
+<pre><code>    # /etc/init.d/cgconfig start
+</code></pre>
+
+<p>или</p>
+
+<pre><code>    # service cgconfig start
+</code></pre>
+
+<p>поскольку libvirt не может найти правил для новой виртуальной машины.</p>
+
+<p>Единственно, что мне не понятно, почему разработчики Fedora не сделали
+проверку при создании виртуальной машины: запущена ли эта служба или нет. К
+тому же, cgroup сейчас не настолько широко развита и далеко не на всех дистрах
+так широко используется, чтобы запуск ее стал очевидным решением.</p>
+
+<p>Ладно, не сделали и не сделали. В любом случае, дабы избежать таких проблем в
+дальнейшем, либо перед запуском виртуальной машины запускайте службу руками,
+либо же добавьте ее в автозагрузку при помощи ntsysv или chkconfig.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hrafn</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-12-02T15:56:18+03:00" pubdate data-updated="true">Dec 2<span>nd</span>, 2010</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hrafn.me/2010/12/fedora-14-oshibka-pri-sozdanii-virtualnoj-mashiny" data-via="" data-counturl="http://hrafn.me/2010/12/fedora-14-oshibka-pri-sozdanii-virtualnoj-mashiny" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/articles/package-management-in-rhel6-yum" title="Previous Post: Управление пакетами в RHEL6. Yum">&laquo; Управление пакетами в RHEL6. Yum</a>
+      
+      
+        <a class="basic-alignment right articlenav" href="/2010/12/opensuse-i-shrifty-okonchanie" title="Next Post: openSUSE и шрифты. Окончание">openSUSE и шрифты. Окончание &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-search-and-databags">Основы Chef. Поиск и Data Bags</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-introduction-to-cookbooks">Основы Chef. Введение в "Поваренные книги"</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-core-components">Основы Chef. Базовые компоненты</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-architecture">Основы Chef. Введение в архитектуру</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/about-blog-design">Немного про дизайн</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/103291489173191931572?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Alexander 'Hrafn' Ivanov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

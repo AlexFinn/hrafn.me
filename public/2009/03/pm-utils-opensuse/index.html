@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>pm-utils — openSUSE - Hrafn.me</title>
+  <meta name="author" content="Alexander 'Hrafn' Ivanov">
+
+  
+  <meta name="description" content="Вольный перевод :) Кстати, оригинал лежит здесь. Итак: 1.Pm-utils - инфраструктура спящего режима нового поколения pm-utils будет новой структурой &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hrafn.me/2009/03/pm-utils-opensuse">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hrafnme" rel="alternate" title="Hrafn.me" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  <!-- Piwik --> 
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://stat.alexfinn.eu/" : "http://stat.alexfinn.eu/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 3);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://stat.alexfinn.eu/piwik.php?idsite=3" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft"></div>
+  	<div id="logoText"></div>
+  	<div id="logoRight"></div>
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">Hrafn.me</a></h1>
+  
+    <h2>...</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hrafnme" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hrafn.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/docs">Docs</a></li>
+  <li><a href="/lpi">LPI</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">Pm-utils — openSUSE</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-03T00:00:00+03:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Вольный перевод :) Кстати, оригинал лежит <a href="http://en.opensuse.org/Pm-utils_10.2">здесь</a>. Итак:</p>
+
+<!--more-->
+
+
+<p><em><strong>1.Pm-utils - инфраструктура спящего режима нового поколения</strong></em></p>
+
+<p><strong>pm-utils</strong> будет новой структурой спящего режима. Обычно используется HAL для выполнения различных хаков в обход багов в драйверах и подсистемах, которые еще не знают про спящий режим.</p>
+
+<p>Хотя <strong>pm-utils</strong> - структура, которая будет общей среди всех Linux-дистрибутивов в будущем, есть еще некоторые Suse-специфичные особенности и
+патчи, которые пока неизвестны. Я укажу варианты конфигураций, которые до сих
+пор относятся только к Suse.</p>
+
+<p><em><strong>2.Основные функциональные возможности (или “Как это работает”) </strong></em></p>
+
+<p>Концепция очень проста: основной скрипт (pm-action, вызываемый через
+символическую ссылку как pm-suspend или pm-hibernate) выполняет так называемые
+“крюки”, скрипты, расположенные в <strong>/etc/pm/hooks</strong> в алфавитном порядке, с
+параметрами suspend (suspend to RAM) или hibernate (suspend to disk). Как
+только все “крюки” сделаны, компьютер отправляется в “сон”. После того, как
+машина снова пробудилась, все “крюки” выполняются в обратном порядке с
+параметром resume (resume from RAM) или thaw (resume from disk). “Крюки”
+делают различные вещи, например, готовят bootloader, останавливают подсистему
+bluetooth или выгружают критические модули.</p>
+
+<p>Обычно pm-suspend и pm-hibernate вызываются HAL’ом, который в свою очередь
+вызывается апплетами Рабочего Стола, такими как gnome-power-manager или
+kpowersave.</p>
+
+<p><em><strong>3.Конфигурация</strong></em></p>
+
+<p>Основной файл конфигурации - <strong>/etc/pm/config</strong>. Дополнительные файлы могут
+быть расположены в <strong>/etc/pm/config.d</strong>. Необходимо отметить, что файлы
+конфигурации и “крюки” должны быть исполняемыми файлами (иметь установленный
+бит “x”).</p>
+
+<p><strong>Переменные в /etc/pm/config</strong></p>
+
+<blockquote><p>SUSPEND_MODULES=”button” # список модулей, которые должны быть выгружены до
+остановки</p></blockquote>
+
+<p>Suse-специфичные варианты:</p>
+
+<blockquote><p>HIBERNATE_METHOD={userspace,kernel} # выбирается метод suspend-to-disk. По-
+умолчанию, userspace.</p>
+
+<p>S2RAM_OPTS= “” # опции, передающиеся s2ram. Смотрите также
+<a href="http://en.opensuse.org/S2ram">s2ram</a> для большей информации.</p></blockquote>
+
+<p><em><strong>4.Поиск неисправностей</strong></em></p>
+
+<p>Если suspend или hibernate не сработают корректно, вы вероятно сможете найти
+некоторую информацию в лог-файле <strong>/var/log/pm-suspend.log</strong>, например, какие
+“крюки” были запущены и каков был их выход.</p>
+
+<p><em><strong>5.Создание собственных “крюков”</strong></em></p>
+
+<p>Если вы хотите сделать нечто специфического в течение выполния
+suspend/hibernate, вы можете легко поместить вам собственный “крюк” в
+/etc/pm/hooks. “Крюки” в этой директории будут вызываться по очереди в
+алфавитном порядке в течение выполнения suspend (это причина того, что их
+название начинается с двух цифр, чтобы сделать порядок выполнения более явным)
+и в обратном порядке в течение выполнения resume.</p>
+
+<p>Я показываю для демонстрации довольно бесполезный “крюк”, который просто
+поместит некоторую информацию в ваш лог-файл:</p>
+
+<pre><code>    #!/bin/sh
+    case $1 in
+        hibernate)
+            echo “Hey guy, we are going to suspend to disk!”
+            ;;
+
+    suspend)
+        echo “Oh, this time we’re doing a suspend to RAM. Cool!”
+    ;;
+
+    thaw)
+        echo “Oh, suspend to disk is over, we are resuming…”
+    ;;
+
+    resume)
+        echo “Hey, the suspend to RAM seems to be over…”
+    ;;
+
+    *) 
+        echo “somebody is calling me totally wrong.” 
+    ;;
+
+    esac
+</code></pre>
+
+<p>Поместите это в /etc/pm/hooks/66dummy, сделайте chmod +x /etc/pm/hooks/66dummy
+и оно будет изрыгать некоторые ссобщения в течение работы suspend/resume.</p>
+
+<p><strong>Внимание:</strong> Все “крюки” запускаются от пользователя <strong>root</strong>. Это означает, что вы должны быть осторожны, создавая временные файлы, проверьте, чтобы переменные PATH были установлены корректно и т.д., чтобы избежать проблем с безопасностью.</p>
+
+<p><em><strong>6.Различные tips &amp; tricks</strong></em></p>
+
+<p><strong>Вызов suspend вручную</strong></p>
+
+<p>Если вы хотите вызвать suspend вручную для отладки, без использования HAL или
+других структур, вызывайте <strong>pm-suspend</strong> или <strong>pm-hibernate</strong> от имени
+пользователя <strong>root</strong>.</p>
+
+<p><strong>Внимание:</strong> Это полезно для отладки. И было бы хорошо, если бы вы знал, что делаете, используя это.</p>
+
+<p><strong>Использования suspend-to-RAM на машинах, не входящих в whitelist s2ram</strong></p>
+
+<p>Если вы хотите вызвать suspend-to-RAM, вам необходимо добавить <strong>-f</strong> к
+переменной <strong>S2RAM_OPTS</strong> в <strong>/etc/pm/config</strong>. Вы также должны поместить все
+другие варианты, которые вам необходимы, в эту переменную. Например:</p>
+
+<pre><code>    S2RAM_OPTS=”-f -a 3″
+</code></pre>
+
+<p>Это может быть хорошей идеей, чтобы сообщить о вашей машине, как о прописанной
+в S2RAM-Page, так чтобы вам не пришлось этого делать в дальнейшем.</p>
+
+<p><strong>Отключение “крюка”</strong></p>
+
+<p>Если вам не нравится, как работает “крюк”, или он бесполезен, или даже вреден,
+мы бы оценили bugreport от вас по этому поводу. Вы можете однако просто
+отключить “крюк”, удалив бит “x” из файла при помощи</p>
+
+<pre><code>    chmod -x /etc/pm/hooks/the_hook
+</code></pre>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alexander 'Hrafn' Ivanov</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-03T00:00:00+03:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2009</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hrafn.me/2009/03/pm-utils-opensuse" data-via="" data-counturl="http://hrafn.me/2009/03/pm-utils-opensuse" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/2009/03/lsof-netstat" title="Previous Post: lsof and netstat">&laquo; lsof and netstat</a>
+      
+      
+        <a class="basic-alignment right articlenav" href="/2009/03/predotvrashhenie-brute-force-atak-s-pomoshhyu-fail2ban" title="Next Post: Предотвращение Brute Force атак с помощью fail2ban">Предотвращение Brute Force атак с помощью fail2ban &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-search-and-databags">Основы Chef. Поиск и Data Bags</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-introduction-to-cookbooks">Основы Chef. Введение в "Поваренные книги"</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-core-components">Основы Chef. Базовые компоненты</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-architecture">Основы Chef. Введение в архитектуру</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/about-blog-design">Немного про дизайн</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/103291489173191931572?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Alexander 'Hrafn' Ivanov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

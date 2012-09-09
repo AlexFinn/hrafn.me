@@ -1,0 +1,332 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Основы Chef. Введение в архитектуру - Hrafn.me</title>
+  <meta name="author" content="Alexander 'Hrafn' Ivanov">
+
+  
+  <meta name="description" content="Ссылка на оригинал Эта статья является введением в архитектуру Chef.
+Здесь описываются основные функции сервера Chef (Chef Server), функции узлов ( &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hrafn.me/2012/04/chef-basics-architecture">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hrafnme" rel="alternate" title="Hrafn.me" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  <!-- Piwik --> 
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://stat.alexfinn.eu/" : "http://stat.alexfinn.eu/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 3);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://stat.alexfinn.eu/piwik.php?idsite=3" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft"></div>
+  	<div id="logoText"></div>
+  	<div id="logoRight"></div>
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">Hrafn.me</a></h1>
+  
+    <h2>...</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hrafnme" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hrafn.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/docs">Docs</a></li>
+  <li><a href="/lpi">LPI</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">Основы Chef. Введение в архитектуру</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-20T00:00:00+04:00" pubdate data-updated="true">Apr 20<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="http://wiki.opscode.com/display/chef/Architecture+Introduction">Ссылка на оригинал</a></p>
+
+<p>Эта статья является введением в архитектуру Chef.
+Здесь описываются основные функции сервера Chef (Chef Server), функции узлов (Node) и управляющих станций Chef (Chef Workstation) при использовании Chef, а также взаимодействие между этими компонентами.</p>
+
+<p>Позволю себе сделать несколько замечаний.
+Однозначных русских вариантов основных понятий я скорее не нашел. Каждый пишущий про Chef, переводит по-своему. Если какие-то варианты переводов покажутся неверными или читающий может предложить свой, более адекватный, милости прошу: пишите в Twitter, G+, Jabber или на почту.
+Кроме того, перевод не профессиональный. Я перевожу, кроме того, далеко не все, поскольку считаю, что главное передать смысл.</p>
+
+<!--more-->
+
+
+<p><a href="/media/images/2012/04/20/chef-basics-nwc.png"><img src="/media/images/2012/04/20/chef-basics-nwc.png" alt="" /></a></p>
+
+<h2>Chef Server, Узлы и Управляющие станции</h2>
+
+<p>При использовании Chef для управления инфраструктурой придется иметь дело с тремя типами хостов: сервером Chef, узлами и управляющими станциями Chef.</p>
+
+<h3>Chef Server</h3>
+
+<p>Chef Server - это центральное хранилище конфигурационных данных инфраструктуры. Chef Server хранит данные, необходимые для настройки узлов, а также предоставляет поиск, позволяющий динамически управлять конфигурацией узлов на основе данных. REST API делает эти данные доступными для узлов и управляющих станций. Дополнительно, есть возможность использовать Chef Server&#8217;s WebUI для управления инфраструктурой через веб-интерфейс.</p>
+
+<h3>Узлы</h3>
+
+<p>Узел - любой хост, настроенный на использование клиента chef. Клиент chef работает на узле, обращаясь к Chef Server за информацией, необходимой для настройки узла. С точки зрения сервера Chef, узел - чуть больше, чем список запуска (run_list), список рецептов и ролей, которые будут применены к узлу и будут определять его конфигурацию, и аттрибуты, набор данных о самом узле. Поскольку Узел - это машина, на которой работает chef-client, узлы иногда рассматриваются как &#8220;клиенты&#8221;. (Это не относится к клиентскому API, которое аутентифицируется через Chef Server API).</p>
+
+<p>В случае, если узлы рассматриваются в качестве &#8220;клиентов&#8221;, предполагается связь между исполняемым файлом chef-client, вызовом API предназначенным для аутентификации и авторизации, используя идентификационную информацию в объекте клиентского API, для сохранения объекта узла на сервере.</p>
+
+<h3>Управляющая станция Chef</h3>
+
+<p>Управляющая станция - это хост, использующийся для изменения &#8220;поваренных книг&#8221; и других конфигурационных данных - обычно, это рабочая станция системного администратора. Также управляющая станция имеет два ключевых компонента:</p>
+
+<ol>
+<li>knife - приложение. поставляемое вместе с chef</li>
+<li>репозиторий, содержащий документы конфигурации инфраструктуры</li>
+</ol>
+
+
+<p>Как будет видно в дальнейшем, эти документы конфигурации включают &#8220;поваренные книги&#8221;, роли, data bags и многое другое. В идеале, эти документы находятся под управлением какой-либо системы контроля версий. При использовании knife, рабочая станция используется как для выгрузки конфигурационных данных на Chef Server, так и для взаимодействия с отдельными узлами через SSH-соединение, если это необходимо.</p>
+
+<h2>Клиенты, Аутентификация и Авторизация</h2>
+
+<p>Роль Chef Server внутри инфраструктуры проста. Он хранит информацию о конфигурации, которая загружается на него, и возвращает эту информацию, когда ее запрашивает клиент API.</p>
+
+<p>Chef использует клиентский API и систему аутентификации и авторизации, чтобы быть уверенным, что данные конфигурации могут быть прочитаны и обновлены только теми, кто авторизован. Клиент Chef (работающий на узле) и knife (работающий на управляющей станции) взаимодействуют с Chef Server, используя клиентский API.</p>
+
+<p>Другими словами, клиент Chef - это сам испольняемый файл &#8216;chef-client&#8217;. Клиентский API - объект, который представляется зашифрованной &#8220;личностью&#8221;, использующейся для аутентификации и авторизации в каждом вызове API.</p>
+
+<p>Для того, чтобы быть уверенным, что запросы приходят от известного API, Chef использует шифрование публичным ключом, пользователи Hosted Chef имеют некоторые дополнительные возможности более тонкой настройки. Клиенты API обладают соответствующими приватными и публичными ключами шифрования. Каждый запрос API, сделанный исполняемым файлом chef, подписывается конкретным приватным ключом клиента API. Затем Chef Server проверяет, что запрос соответствует публичныому ключу клиента.</p>
+
+<p>После этого, Chef Server должен убедиться, что клдиент, сделавший запрос, имеет права, достаточные действий, которые запрашиваются (например, выгрузка &#8220;поваренной книги&#8221; или получение run_list.) Этот процесс известен как авторизация. Open Source Chef Server и Hosted Chef используют различные системы авторизации.</p>
+
+<h3>Open Source Chef</h3>
+
+<p>В Open Source Chef определенные клиенты API могут быть помечены как &#8220;admin clients&#8221;. Авторизация для различных действий устанавливается помечен ли клиент API как &#8220;admin&#8221; или нет. Admin clients используются при создании запросов через knife и обладают всеми возможными правами. Не-&#8220;admin&#8221; клиенты обладают ограниченными правами и используются для узлов внутри инфтраструктуры.</p>
+
+<h3>Hosted Chef</h3>
+
+<p>Hosted Chef использует более комплексную систему авторизации, обеспечивающую более точный контроль на основе client-by-client (или user-by-user). В этой системе клиенты API и пользователи могут иметь права на СОЗДАНИЕ, ЧТЕНИЕ, ОБНОВЛЕНИЕ, УДАЛЕНИЕ или права на ВЫДАЧУ ПРАВ для объектов, хранящихся на Hosted Chef (данные узла, данные &#8220;поваренной книги&#8221; и т.д.). Hosted Chef должен убедиться, что делающий запрос клиент имеет соответствующие права на запрашиваемое действие. Для упрощения управления правами Hosted Chef предоставляет множество заранее созданных групп, обладающих правами в соответствие с определенными ролями. Пользователи и клиенты, входящие в группу &#8220;admin&#8221;, имеют все права на все объекты. Не относящиеся к людям клиенты API (такие, как использующиеся узлами) будут автоматически помещены в группу клиентов, которые имеют права, подобные не-административным клиентам в Open Source Chef, тогда как клиенты-люди могут быть помещены в группу &#8220;users&#8221;, которая обладает правами, подобными административным клиентам в Open Source Chef.</p>
+
+<p>Когда chef-client запускается на нвоом узле, Chef спроектирован для автоматического создания нового клиента API для данного узла. По этой причине, поскольку пользователи или административные клиенты настраиваются один раз должным образом для использования knife и подключения через WebUI или Management Console, часто бывает необходимо продумать детали клиентов API, аутентификации и авторизации.</p>
+
+<h2>Hosted Chef</h2>
+
+<p>В дополнение к более точной системы авторизации у Hosted Chef есть еще две концепции, не использующихся в Open Source Chef: Пользователи и Организации.</p>
+
+<h3>Пользователи</h3>
+
+<p>Пользователи - это, что и можно представить, исходя из названия: сертифицированные сущности, используюшиеся людьми для подключения к Hosted Chef. Как и клиенты, у них есть ключи, которые используются для программного подключения к Hosted Chef, через api.opscode.com или knife. Но у них также есть пароли, которые можно использовать для входа на различные веб-страницы, которые отображает Hosted Chef.</p>
+
+<p>Пользователи могут относиться к организации, которая предоставит им соответствующие права для взаимодействия и управления этой организацией. Однако, в отличие от клиентских API, Пользователи могут относиться к более, чем одной организации, например, консультант мог бы создать отдельную организацию для каждого из своих клиентов. При планировании аутентификации и авторизации проще всего рассматривать пользователя как еще одного клиента API.</p>
+
+<p>Пользователи обладают единственной учетной записью для всех страниц Opscode. Одни и те имя и пароль могут использоваться для входа в Hosted Chef Management Console, the Opscode Cookbooks Site или help.opscode.com.</p>
+
+<h3>Организации</h3>
+
+<p>При регистрации в Hosted Chef создается учетная запись пользователя и организация. Организация может представлять собой всю компанию целиком, какой-то отдельный департамент или любой сгруппированный набор серверной инфраструктуры, которым планируется управлять. Организации - это сущности, которые будут оплачиваться при использовании Hosted Chef. За исключением пользователей, ничего общего между организациями не существует. Клиентский API в одной организации не может прочитать данные узла из другой организации.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Alexander 'Hrafn' Ivanov</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-20T00:00:00+04:00" pubdate data-updated="true">Apr 20<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hrafn.me/2012/04/chef-basics-architecture" data-via="" data-counturl="http://hrafn.me/2012/04/chef-basics-architecture" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/2012/04/about-blog-design" title="Previous Post: Немного про дизайн">&laquo; Немного про дизайн</a>
+      
+      
+        <a class="basic-alignment right articlenav" href="/2012/04/chef-basics-core-components" title="Next Post: Основы Chef. Базовые компоненты">Основы Chef. Базовые компоненты &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-search-and-databags">Основы Chef. Поиск и Data Bags</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-introduction-to-cookbooks">Основы Chef. Введение в "Поваренные книги"</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-core-components">Основы Chef. Базовые компоненты</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-architecture">Основы Chef. Введение в архитектуру</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/about-blog-design">Немного про дизайн</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/103291489173191931572?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Alexander 'Hrafn' Ivanov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

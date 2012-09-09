@@ -1,0 +1,380 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>LTS или не LTS. Вот в чем вопрос... - Hrafn.me</title>
+  <meta name="author" content="Alexander 'Hrafn' Ivanov">
+
+  
+  <meta name="description" content="Первый раз про Russian CentOS Remix я услышал достаточно давно, уже наверно
+несколько месяцев прошло. Мысли свои по этому поводу я выскажу чуть позже &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hrafn.me/2011/01/lts-ili-ne-lts-vot-v-chem-vopros">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hrafnme" rel="alternate" title="Hrafn.me" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  <!-- Piwik --> 
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://stat.alexfinn.eu/" : "http://stat.alexfinn.eu/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 3);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://stat.alexfinn.eu/piwik.php?idsite=3" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft"></div>
+  	<div id="logoText"></div>
+  	<div id="logoRight"></div>
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">Hrafn.me</a></h1>
+  
+    <h2>...</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hrafnme" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hrafn.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/docs">Docs</a></li>
+  <li><a href="/lpi">LPI</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">LTS или не LTS. Вот в чем вопрос...</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-12T12:42:47+03:00" pubdate data-updated="true">Jan 12<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Первый раз про Russian CentOS Remix я услышал достаточно давно, уже наверно
+несколько месяцев прошло. Мысли свои по этому поводу я выскажу чуть позже в
+этом посте. Но на днях встретил упоминание про Remix сначала в блоге у Аркадия
+Шейна (<a href="http://tigro.info/wp/?p=2100">http://tigro.info/wp/?p=2100</a>), а позже,
+в этот же день, и в твиттере было обсуждение. Ссылку на обсуждение дать
+затруднительно, поскольку треды в твиттере - это нечто :) Собственно, этот
+пост пишется как раз по мотивам обсуждений в твиттере, а также в связи с тем,
+что мне захотелось немного порассуждать о том, есть ли необходимость в
+долгосрочной поддержке десктопных систем или нет, если есть, то кому это надо
+и в каком виде.</p>
+
+<!--more-->
+
+
+<p>Если мне память не отказывает, то фактически долгосрочная поддержка
+дистрибутивов на данный момент присутствует у Novell (SLES &amp; SLED), Canonical
+(Ubuntu) и Red Hat. В связке с последним идет и CentOS, пересобирающий пакеты
+от них. Стоит уточнить, что я не рассматриваю именно платную поддержку или
+что-то подобное. Здесь имеется ввиду, по большей части, не платность или
+бесплатность, а выпуск обновлений для продуктов. К числу дистрибутивов,
+которые фактически являются долгосрочноподдерживаемыми, я бы причислил и
+Debian, в основном за счет того, что выпускается в данное время по готовности,
+и время между выпусками достаточно приличное, хотя и сильно меньше, чем у
+других. Спорить о том, какая из систем поддерживается дольше и поддержку какой
+из систем реально можно считать долгосрочной, я не буду. Разговор-то все же не
+о том.</p>
+
+<p>Я некоторое время использовал на своем десктопе, а позже и ноутбуке, SLED10 и
+SLED11 от Novell. Да, многих веще не хватало, поскольку в первую очередь
+данная система предназначена все же корпоративных пользователей. Однако
+основные требующиеся мне пакеты там присутствовали, проблема была только с
+поддержкой мультимедиа. Которая решалась подключением сначала репозиториев от
+openSUSE, что неправильно, а потом репозитория от стороннего человека. К
+сожалению, ссылки я сейчас не нашел, позже, если удастся найти - выложу. На
+мой взгляд, система работала стабильнее, чем openSUSE, собственно по этой
+причине она и была выбрана. Стоимость годовой поддержки и он-лайн доступа к
+обновлениям достаточно невелика - порядка 1500 рублей на тот момент.</p>
+
+<p>После моего перехода на redhat-based дистрибутивы я пробовал использовать
+RHEL5 Desktop и CentOS на ноутбуке. Ммм, впечатления странные, честно говоря.
+С одной стороны, недостаток опыта работы с ними на тот момент, с другой
+стороны - откровенно устаревшее программное обеспечение, к которому привыкнуть
+после SLED11 и Fedora было достаточно тяжело. Однако, мне известны люди,
+которые используют CentOS в качестве десктопной системы и вполне довольны. Да
+и сам я на Центе ни разу не встречал случаи неудачной загрузки после
+обновления ядра, например, с которыми я сталкивался на Fedora.</p>
+
+<p>Данный пост пишется с ноутбука, работающего под RHEL6 Desktop. И он устраивает
+мне более чем полностью :) Не хватает пока репозитория RPMFusion для шестой
+версии RHEL, но надеюсь, что он вскоре появится. Вопросы мультимедиа решаются
+подключением дополнительных репозиториев, которых достаточно для комфортной
+работы.</p>
+
+<p>С Ubuntu я сталкивался неоднократно. Был период, когда я работал именно в этой
+системе. Да и сейчас я периодически, после выхода новых версий, смотрю, что
+нового появилось и каковы изменения. На мой взгляд, LTS-релизы Ubuntu, кроме
+увеличенного срока поддержки, ни чем особо не отличаются от всех остальных
+релизов. Хотя иногда складывается впечатление, что они, как ни странно,
+получаются менее стабильными, чем обычные. Честно говоря, мне практически
+неизестны люди, использующие именно Ubuntu LTS для десктопа.</p>
+
+<p>Дебиан. Про Дебиан мне сказать практически нечего. Стабильные версии
+используются, в основном, для серверов, но есть несколько известным мне людей,
+которые именно стабильные релизы Дебиана используют для своего повседневного
+использования. Устаревшие приложения их не пугают, поскольку от системы
+требуется именно стабильность и конечный результат работы, а не новые функции
+и свежее программное обеспечение.</p>
+
+<p>Получился такой краткий обзорчик того, что я сам использовал на ноутбуке :) А
+теперь поговорим собственно о самой теме. На примере CentOS.</p>
+
+<p>Так нужен ли дистрибутив с продолжительным сроков выпуска обновлений
+программного обеспечения в десктопном варианте? Я считаю, что нужен. Как
+минимум, нужен мне. Поскольку удобно, стабильно и предсказуемо.</p>
+
+<p>Нужен ли аналог Russian Fedora Remix, но только для CentOS? По мне - так
+нужен. Когда я впервые прочитал про возможность такого варианта, мне это не
+понравилось. Увеличенный срок поддержки добавляет нагрузку, поскольку придет
+время, когда будет необходимо поддерживать сразу две, а потом и три версии
+дистрибутива, если следовать срокам поддержки от Red Hat и CentOS. Кроме того,
+не было никакой информации о том, что именно будет изменено в Russian CentOS
+Remix, а для серверного использования мне изменения видеть не хотелось бы. Тут
+важна совместимость с Red Hat.</p>
+
+<p>Сейчас же мое мнение изменилось. В основном, по причине того, что изменения,
+которые, я думаю, будут сделаны, касаются в целом десктопного варианта
+использования системы: мультимедиа и исправление глупых ошибок, как написал
+<a href="http://twitter.com/#!/atigro/status/24544772127457281">@atigro</a>. Если в итоге
+это будет сделано по аналогии с RFR, но такой вариант пожалуй нужен даже
+гораздо больше, чем сам RFR, уж пусть простят меня пользователи Русской Федоры
+:)</p>
+
+<p>Пока у меня еще была работа :), мне несколько раз приходилось решать, какой из
+дистрибутивов Linux предложить для установки на обычные десктопные машины для
+клиентов. В тот момент CentOS для десктопов я даже не рассматривал, по разным
+причинам. И большие затраты по времени по настройке различных вещей для
+нормального десктопного использования, включая мультимедиа, приведение
+рабочего стола и шрифтов в приличный вид и т.д. Да, можно сделать свою
+собственную сборку дистрибутива и устанавливать уже ее, но тут есть некоторые
+моменты, которые заставили отказаться от этой идеи: затраты на дальнейшую
+поддержку своей версии в актуальном состоянии плюс мой возможный уход на
+другое место работы и соответственно опять-таки поддержка всего этого добра. В
+итоге была выбрана Ubuntu, как наиболее приспособленный вариант для десктопа
+по умолчанию.</p>
+
+<p>Во время обсуждения в твиттере высказывалось мнение, что обновления
+программного обеспечения для, например, секретарши не нужны совсем. На мой
+взгляд, это слегка неверное мнение. Все-таки обновления приносят не только
+расширение возможностей для приложений, но и исправляют ошибки, которые не
+зависят от того, секретарша ли сидит на компьютером или кто-то другой :) И
+исправлять их нужно. Поскольку на глазок определять, где может всплыть ошибка,
+тяжело и бессмысленно. Посему, обновления нужны в любом случае.</p>
+
+<p>Клиенты на моей бывшей работе не хотели платить лишние деньги за ОС,
+устанавливаемые на рабочие машины. В основном, ради этого переход на Linux и
+осуществлялся, поэтому дистрибутивы с платной поддержкой - SLE* и Red Hat - не
+рассматривались. Как я уже написал ранее, была выбрана Ubuntu. Скажем так, я
+был вынужден принять это решение, поскольку альтернативы предложить я не мог.
+Про CentOS в нынешнем виде я уже тожу упоминал, хотя, при возможности, я бы
+предпочел именно его, поскольку все сервера на CentOS и поддерживать единую
+инфраструктуру сильно проще. Но Russian CentOS Remix на тот момент еще не было
+:) Да и сейчас пока нет. Но очень хочется, чтобы было&#8230;</p>
+
+<p>Сейчас перечитал написанное. Да уж, сумбурно, не совсем по теме местами, да и
+конкретных доводов нет. Согласен. Это все моя ИМХА :)</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hrafn</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-12T12:42:47+03:00" pubdate data-updated="true">Jan 12<span>th</span>, 2011</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hrafn.me/2011/01/lts-ili-ne-lts-vot-v-chem-vopros" data-via="" data-counturl="http://hrafn.me/2011/01/lts-ili-ne-lts-vot-v-chem-vopros" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/2010/12/rhcsa" title="Previous Post: RHCSA">&laquo; RHCSA</a>
+      
+      
+        <a class="basic-alignment right articlenav" href="/articles/spacewalk-intro" title="Next Post: Spacewalk. Intro">Spacewalk. Intro &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-search-and-databags">Основы Chef. Поиск и Data Bags</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-introduction-to-cookbooks">Основы Chef. Введение в "Поваренные книги"</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-core-components">Основы Chef. Базовые компоненты</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-architecture">Основы Chef. Введение в архитектуру</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/about-blog-design">Немного про дизайн</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/103291489173191931572?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Alexander 'Hrafn' Ivanov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

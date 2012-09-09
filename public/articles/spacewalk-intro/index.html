@@ -1,0 +1,371 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Spacewalk. Intro - Hrafn.me</title>
+  <meta name="author" content="Alexander 'Hrafn' Ivanov">
+
+  
+  <meta name="description" content="Управление и котроль большого количества операционных систем не простая
+задача. Spacewalk - это инструмент , позволяющий сильно упростить выполнение &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hrafn.me/articles/spacewalk-intro">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hrafnme" rel="alternate" title="Hrafn.me" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  <!-- Piwik --> 
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://stat.alexfinn.eu/" : "http://stat.alexfinn.eu/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 3);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://stat.alexfinn.eu/piwik.php?idsite=3" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft"></div>
+  	<div id="logoText"></div>
+  	<div id="logoRight"></div>
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">Hrafn.me</a></h1>
+  
+    <h2>...</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hrafnme" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hrafn.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/docs">Docs</a></li>
+  <li><a href="/lpi">LPI</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">Spacewalk. Intro</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-24T15:45:53+03:00" pubdate data-updated="true">Jan 24<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="https://fedorahosted.org/spacewalk/attachment/wiki/WikiStart/logo.png?format=raw"><img src="https://fedorahosted.org/spacewalk/attachment/wiki/WikiStart/logo.png?format=raw" alt="" /></a></p>
+
+<p>Управление и котроль большого количества операционных систем не простая
+задача. Spacewalk - это инструмент , позволяющий сильно упростить выполнение
+этих задач. Он хранит информацию об оборудовании и программном обеспечении
+систем, позволяет управлять виртуальными системами, развертывать файлы,
+запускать скрипты и устанавливать программное обеспечение.</p>
+
+<!--more-->
+
+
+<p>В июне 2008 года компания Red Hat анонсировала проект Spacewalk, являющийся
+open source решением для управления Linux-инфраструктурой. Spacewalk
+представляет собой открытый по лицензии GPL2 продукт Red Hat Network Satellite
+Server, имеющий давнюю, с 2001 года, историю разработки.</p>
+
+<p>Вот как описывает Spacewalk <a href="http://markelov.blogspot.com">Андрей Маркелов</a>:</p>
+
+<p>Сервер Spacewalk обслуживает весь жизненный цикл Linux-инфраструктуры и решает
+следующие задачи:</p>
+
+<ul>
+<li>Сбор информации о системах (аппаратное обеспечение и установленное ПО)</li>
+<li>Установка и обновление операционных систем</li>
+<li>Установка и обновление программного обеспечения</li>
+<li>Установка систем при помощи kickstart-файлов</li>
+<li>Управление и распространение конфигурационных файлов</li>
+<li>Мониторинг систем</li>
+<li>Установка виртуальных машин</li>
+<li>Запуск/остановка/настройка виртуальных машин</li>
+<li>Работа с географически-распределенной сетью</li>
+<li>Автоматизация задач системного администрирования</li>
+<li>Распределение ролей администраторов и группировка систем</li>
+</ul>
+
+
+<p><strong>Управление программным обеспечением</strong></p>
+
+<p>Spacewalk позволяет управлять программным обеспечением и его обновлением на
+redhat-based дистрибутивах: Fedora, CentOS и Scientific Linux. Позволяет
+распространять контент среди различного окружения, управлять развертыванием
+обновлений на системах, а также позволяет отслеживать на какой стадии
+обновления находится конкретная система в данном окружении. Простой
+централизованный веб-интерфейс просматривать системы и их статус обновлений,
+кроме того, инициализировать процесс обновления.</p>
+
+<p><a href="http://spacewalk.redhat.com/img/screenshots/your_spacewalk.png"><img src="http://spacewalk.redhat.com/img/screenshots/your_spacewalk.png" alt="" /></a></p>
+
+<p><em>Пример главной страницы Spacewalk.</em></p>
+
+<p><strong>Другие возможности управления</strong></p>
+
+<p>Кроме управления программным обеспечением, Spacewalk обеспечивает возможность
+инициализации и мониторинга. Например, развертыват системы с помощью
+kickstart-файлов, так же как и управлять и распространять файлы конфигурации
+на системы. Функции мониторинга позволяет отслеживать статус систем рядом со
+статусом обновлений. Spacewalk также обладает поддержкой виртуализации, что
+позволяет подготавливать, контролировать, управлять и мониторить виртуальные
+гостевые системы Xen.</p>
+
+<p>Ниже я выложил еще несколько скриншотов:</p>
+
+<p><a href="http://spacewalk.redhat.com/img/screenshots/system-overview.png"><img src="http://spacewalk.redhat.com/img/screenshots/system-overview.png" alt="" /></a><em>Обзор системы.</em></p>
+
+<p><em><a href="http://spacewalk.redhat.com/img/screenshots/configuration-overview.png"><img src="http://spacewalk.redhat.com/img/screenshots/configuration-overview.png" alt="" /></a></em>Обзор конфигурации._</p>
+
+<p><a href="http://spacewalk.redhat.com/img/screenshots/system-set-manager.png"><img src="http://spacewalk.redhat.com/img/screenshots/system-set-manager.png" alt="" /></a><em>System Set Manager.</em></p>
+
+<p><a href="http://spacewalk.redhat.com/img/screenshots/kickstart_overview.png"><img src="http://spacewalk.redhat.com/img/screenshots/kickstart_overview.png" alt="" /></a><em>Обзор профиля kickstart.</em></p>
+
+<p>Надеюсь, что из супермаленького обзора более-менее понятно, что из себя
+представляет данный продукт. Процесс установки здесь и сейчас описывать не
+буду. Для этого будет отдельная заметка. Лучше посмотрим другие вещи.</p>
+
+<p>На данный момент последняя версия - 1.2. Вышла 19 ноября 2010 года. Некоторые
+интересные моменты в этом релизе:</p>
+
+<ul>
+<li>некоторые страницы веб-интерфейса были переписаны с Perl на Java</li>
+<li>расширена локализация</li>
+<li>ограниченная поддержка PostgreSQL в качестве бэк-энда, количество операций пока ограничено</li>
+<li>поддержка работы на Fedora 14</li>
+<li>Fedora 12 поддерживается последний выпуск, далее поддержки не будет</li>
+</ul>
+
+
+<p>А вот что позволяет Spacewalk при работе с PostgreSQL:</p>
+
+<ul>
+<li>синхронизация контента с помощью satellite-sync и spacewalk-repo-sync</li>
+<li>rhnpush</li>
+<li>регистрация клиентов</li>
+<li>работа с yum</li>
+</ul>
+
+
+<p>Таким образом, на данный момент возможно использование Spacewalk с PostgeSQL
+для управления программным обеспечением на машине. К сожалению, полная
+поддержка этой базы данных заявляет в версии 2.0. А вот что предполагается
+сделать в ближайших релизах:</p>
+
+<ul>
+<li>поддержка RHEL6</li>
+<li>плагин для apt-get</li>
+<li>поддержка клиента Oracle 11g</li>
+</ul>
+
+
+<p><strong><em>Использованные ресурсы:</em></strong></p>
+
+<ul>
+<li><a href="https://fedorahosted.org/spacewalk/"><em>https://fedorahosted.org/spacewalk/</em></a></li>
+<li><a href="http://markelov.blogspot.com/2008/08/spacewalk-open-source-linux.html"><em>http://markelov.blogspot.com/2008/08/spacewalk-open-source-linux.html</em></a></li>
+<li><a href="http://spacewalk.redhat.com/"><em>http://spacewalk.redhat.com/</em></a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hrafn</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-24T15:45:53+03:00" pubdate data-updated="true">Jan 24<span>th</span>, 2011</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hrafn.me/articles/spacewalk-intro" data-via="" data-counturl="http://hrafn.me/articles/spacewalk-intro" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/2011/01/lts-ili-ne-lts-vot-v-chem-vopros" title="Previous Post: LTS или не LTS. Вот в чем вопрос...">&laquo; LTS или не LTS. Вот в чем вопрос...</a>
+      
+      
+        <a class="basic-alignment right articlenav" href="/2011/04/fedora-and-infinality-patches" title="Next Post: Fedora and Infinality patches">Fedora and Infinality patches &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-search-and-databags">Основы Chef. Поиск и Data Bags</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-introduction-to-cookbooks">Основы Chef. Введение в "Поваренные книги"</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-core-components">Основы Chef. Базовые компоненты</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-architecture">Основы Chef. Введение в архитектуру</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/about-blog-design">Немного про дизайн</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/103291489173191931572?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Alexander 'Hrafn' Ivanov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

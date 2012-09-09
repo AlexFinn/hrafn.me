@@ -1,0 +1,760 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Установка Thinstuff LX Server - Hrafn.me</title>
+  <meta name="author" content="Alexander 'Hrafn' Ivanov">
+
+  
+  <meta name="description" content="Краткое вступление Стоит напомнить, что Thinstuff LX Server позволяет получить удаленный доступ к
+приложениям на основе X11 с помощью протокола &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hrafn.me/articles/setup-thinstuff-lx-server">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hrafnme" rel="alternate" title="Hrafn.me" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  <!-- Piwik --> 
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://stat.alexfinn.eu/" : "http://stat.alexfinn.eu/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 3);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://stat.alexfinn.eu/piwik.php?idsite=3" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft"></div>
+  	<div id="logoText"></div>
+  	<div id="logoRight"></div>
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">Hrafn.me</a></h1>
+  
+    <h2>...</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hrafnme" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hrafn.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/docs">Docs</a></li>
+  <li><a href="/lpi">LPI</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">Установка Thinstuff LX Server</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-16T12:22:03+03:00" pubdate data-updated="true">Mar 16<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>Краткое вступление</h2>
+
+<p>Стоит напомнить, что Thinstuff LX Server позволяет получить удаленный доступ к
+приложениям на основе X11 с помощью протокола Microsoft RDP (Remote Desktop).
+Что обеспечивает возможность использования как приложений Linux, так и Windows
+на одном рабочем столе — без необходимости внсить изменения в инфраструктуру.</p>
+
+<!--more-->
+
+
+<p>Поскольку разговаривать мы будем о версии, предназначенной именно для машин с
+установленным Linux, то все последующие упоминания будут только об этой
+системе.</p>
+
+<p>[<img src="/media/images/2009/03/16/lx.gif" alt="" />]</p>
+
+<p>Домашняя страница продукта находится по адресу:
+<a href="http://www.thinstuff.com/products/lx-server/">http://www.thinstuff.com/products/lx-server/</a></p>
+
+<p>Подробно останавливаться на описании и возможностях продукта я сейчас не буду,
+с учетом того, что не так давно я вкратце описывал их (<a href="/2009/03/lx-server-ot-thinstuff"><em>LX Server от Thinstuff</em></a>).</p>
+
+<p>Мне нравятся компании, которые дают возможность проверить работоспособность
+продукта, предлагая версии с ограничением подключений или с ограничениями по
+времени использования. Это дает возможность получить общее представление о
+работоспособности и пригодности для использования в конкретной организации и в
+конкретных условиях.</p>
+
+<p>Компания Thinstuff также предоставляет такую возможность, чем мы и
+воспользуемся. Заодно скажу, что для Windows-версии существует 14-дневная
+триальная версия с полноценными возможностями, а для Linux — версия без
+ограничений по времени, но зато с ограничением количества подключений и
+сессий. Оба варианта доступны на следующей странице: <a href="http://www.thinstuff.com/downloads-support/downloads/">http://www.thinstuff.com/downloads-support/downloads/</a> . Подробней на возможностях оценочной Linux-версии я
+остановлюсь чуть позже.</p>
+
+<p>На этой же странице
+(<a href="https://www.thinstuff.com/licensing/">https://www.thinstuff.com/licensing/</a>)
+можно посмотреть варианты предоставляемого продукта, а также стоимость
+лицензий на его использование, которая зависит от количества подключений.</p>
+
+<h2>Установка</h2>
+
+<p>Для начала необходимо получить дистрибутив LX Server.</p>
+
+<p>Переходим в произвольную директорию по вашему выбору. У меня будет /tmp:</p>
+
+<pre><code>    cd /tmp
+    wget [http://www.thinstuff.com/releases/lxserver-1.2.1-5366.sh](http://www.thinstuff.com/releases/lxserver-1.2.1-5366.sh)
+</code></pre>
+
+<p>Размер — примерно 60 мегабайт, поэтому потребуется какое-то время на
+скачивание.</p>
+
+<pre><code>    --2009-03-16 16:37:59-- http://www.thinstuff.com/releases/lxserver-1.2.1-5366.sh 
+    Распознаётся www.thinstuff.com... 78.46.51.238
+    Устанавливается соединение с www.thinstuff.com|78.46.51.238|:80... соединение установлено.
+    Запрос HTTP послан, ожидается ответ... 200 OK
+    Длина: 62484766 (60M) [application/x-binary]
+    Сохраняется в каталог: `lxserver-1.2.1-5366.sh'.
+    100%[===============================================&gt;] 62 484 766 115K/s в 7m 52s
+    2009-03-16 16:45:50 (129 KB/s) - `lxserver-1.2.1-5366.sh' сохранён [62484766/62484766]
+</code></pre>
+
+<p>Для установки необходимо получить права пользователя root. Установка под
+другим пользователем не поддерживается. Запускаем скрипт установщика:</p>
+
+<pre><code>    [root@off2 tmp]# bash lxserver-1.2.1-5366.sh
+    checking archive integrity ...
+    Thinstuff LX Server
+    (c) Thinstuff s.r.o.
+    http://www.thinstuff.com
+    Welcome to the setup routine for the Thinstuff LX Server.
+    This setup will install the RDP server on your computer in
+    the directory /opt/thinstuff/rdpserver. The installation
+    will take about 132 MB of harddisk space.
+    For more information on non-interactive execution of this
+    installer please use:
+    lxserver-1.2.1-5366.sh --help
+    Please press &lt;enter&gt; to continue
+</code></pre>
+
+<p>Здесь требуется нажать Enter для продолжения.</p>
+
+<pre><code>    detecting old installations ...
+    Please choose one of the following actions:
+    [I]nstall: This installs 1.2.1, build 5366.
+    [E]xit: Exit installer without changing anything.
+    Please enter choice (E/I):
+</code></pre>
+
+<p>В данном случае, поскольку я уже ставил этот продукт, то установщик обнаружил
+ее. В данном случае нас интересует новая установка, поэтому выбираем I:</p>
+
+<pre><code>    Please enter choice (E/I): i
+    Ready to begin installation. Please press &lt;enter&gt; to continue.
+</code></pre>
+
+<p>Установщик по любому поводу задаются вопросы ))) Что-то мне это напоминает, но
+сейчас не об этом. Продолжим, нажав Enter.</p>
+
+<pre><code>    BY ANSWERING "Y" TO THE PROMPT AT THE END OF THIS TEXT, YOU ARE CONSENTING
+    TO BE BOUND BY THIS AGREEMENT. IF YOU DO NOT AGREE TO ALL OF THE TERMS OF
+    THIS AGREEMENT, ANSWER "N" TO THE PROMPT AT THE END OF THIS TEXT TO
+    DISCONTINUE THE INSTALLATION. PLEASE PROMPTLY RETURN THE SOFTWARE PACKAGE
+    TO Thinstuff s.r.o.
+    THE FOLLOWING LICENSE GOVERNS YOUR RIGHTS TO THE THINSTUFF LX SERVER(tm)
+    SOFTWARE. YOU ARE NOT GRANTED ANY RIGHTS IN ANY SOFTWARE INCLUDED IN THIS
+    SOFTWARE DISTRIBUTION THAT YOU HAVE NOT LICENSED AND FOR WHICH YOU HAVE NOT
+    PAID THE APPROPRIATE LICENSE FEES TO Thinstuff s.r.o.
+
+    1. License. The enclosed computer software and documentation ("Software")
+    is not being sold and purchased, but is being licensed to you by
+    Thinstuff s.r.o. ("Thinstuff") under a personal, nonexclusive,
+    nontransferable and paid-up license for use only under the following
+    terms, and Thinstuff reserves any rights not expressly granted to you
+    herein. Under the terms of this license you own the media on which the
+    Software is recorded, but Thinstuff retains all of the rights of
+    ownership to the Software and all copies of the Software. This license
+    shall be governed by the laws of the Republic of Austria.
+
+    2. Under this license you may:
+    a.) Make copies of the Software solely for backup or archival purposes.
+    b.) Make simultaneous use of the Software on a number of computers up
+    to the number of licenses you purchased for the software.
+    c.) Transfer your rights under this license for the Software, provided
+    that you give Thinstuff prior written notice of such transfer and
+    --Далее-- 
+</code></pre>
+
+<p>Предлагается прочитать лицензию на использование. И принять ее:</p>
+
+<pre><code>    Do you accept the license (yes/no) ? Yes
+</code></pre>
+
+<p>Далее будет предложено отправить производителю анонимную информацию о
+платформе, на которой будет использоваться данный продукт. Эта информация
+включает в себя тип процессора, версию ядра и другие подобные данные,
+собранные во время установки. Это опционально, можно отказаться, потому нажмем
+No.</p>
+
+<pre><code>    We would like to collect anonymous information about
+    the platforms where this product is installed. These
+    informations would include CPU type, Kernel version
+    and similar data and would be collected only once
+    during this setup.
+    This step is OPTIONAL. If you do not want to send any
+    information, just answer no to the next question. If
+    you agree, then the information that is about to be
+    sent will be displayed before it is actually trans-
+    mitted.
+    Would you like to send anonymous system information (yes/no) ? No
+</code></pre>
+
+<p>И далее следует подготовка и извлечение из архива:</p>
+
+<pre><code>    preparing Archive ...
+    extracting Archive ...
+    WARNING: enabling "trust" authentication for local connections
+    You can change this by editing pg_hba.conf or using the -A option the
+    next time you run initdb.
+
+    * CORBA already running -&gt; skipping 
+    * Starting PostgreSQL: .Done 
+    * lighttpd is already running -&gt; skipping 
+
+    Finished starting system services...
+    FINISHED installing database
+    starting server ...
+
+    * Starting Configuration Server: .Done 
+    * Proxy Service is already running -&gt; skipping 
+    * Application Launcher is already running -&gt; skipping 
+    * Waiting for RDP server to complete startup: 
+
+    Finished starting terminalserver services - accepting connections to the
+    terminalserver
+    Configuring default session program. Please choose one of the following
+    options:
+    [G]nome
+    [T]wm: Built-in simple windowmanager (default).
+    Please enter choice (G/T):
+</code></pre>
+
+<p>Здесь немного остановимся. В комплекте с rdpserver поставляется база данных
+PostgreSQL и веб-сервер lighttd. При установке проверяется установка этих
+компонентов и проверка их работоспособности. На некоторых дистрибутивах Linux
+у меня были проблемы именно на этом шаге. База данных и веб-сервер
+устанавливались, но установщик не мог подключиться к ним для проверки. При
+этом lighttpd не мог обнаружить свой файл конфигурации. Это имело место при
+установке на openSUSE 11.1 и SLED 11 RC1. Может быть, это просто случайность,
+может еще что-то. Успешная установка была проведена на Fedora 10 и SLES 10
+SP2.</p>
+
+<p>Итак, при установке можно выбрать, какой оконный менеджер будет запускаться
+при входе в систему. В данном случае, поскольку я использую Gnome, то он в
+пунктах выбора и присутствует. А вот Twm поставляется вместе с LX Server и,
+если на вашем сервере не ставилась X Window Sustem, то есть возможность
+использовать именно Twm. Я выбираю Gnome:</p>
+
+<pre><code>    Please enter choice (G/T): G
+    Password (for user root):
+</code></pre>
+
+<p>Требуется ввести пароль пользователя root. А также потом ответить на вопрос,
+установить ли скрипт запуска и запускать ли сервис во время старта системы:</p>
+
+<pre><code>    Do you want to install the init.d script and start the service on system start
+    (yes/no) ? Yes
+    INSTALLATION COMPLETE
+    Please copy your license to "/opt/thinstuff/rdpserver/licenses"
+    Default configuration: you can connect to this host with your RDP
+    client. For server management please connect to this host
+    using the https protocol (e.g. https://localhost). By default
+    only the user root has access to the management interface.
+    Please see the documentation at "/opt/thinstuff/rdpserver/doc"
+    for further setup and configuration instructions.
+</code></pre>
+
+<p>На этом процесс установки заканчивается. Для управления сервером необходимо в
+браузере открыть адрес <a href="https://localhost/">https://localhost</a>, если
+устанавливали на локальную машину, а также можно использовать ip-адрес или имя
+компьютера, при удаленной установке. В данной статье ставилось все на
+локальном, потому его ip-адрес использовать и будем.</p>
+
+<h3>Кратко о получившемся</h3>
+
+<p>LX Server устанавливается только в директорию /opt/thinstuff/rdpserver.
+Установка в другую директорию не поддерживается. Это позволяет гарантировать,
+что будет установлена только одна копию сервера. LX Server содержит все
+библиотеки, необходимые для успешного запуска, в своей директории, что
+позволяет обойтись без необходимости установки каки-либо дополнительных
+приложений.</p>
+
+<h2>Настройка и Администрирование</h2>
+
+<p>Поскольку при установке сервера мы решили сразу его и запустить, то он уже
+работает. Но все же хотелось бы как-то управлять им и в дальнейшем. Для этого
+предоставляется скрипт для Thinstuff LX Server, находящийся в файле
+/opt/thinstuff/rdpserver/scripts/rdp-server.init.d-template, который
+необходимо установить. Дальнейшие шаги будут немного отличаться для различных
+дистрибутивов, но для основных достаточно будет проделать следующее:</p>
+
+<pre><code>    cp /opt/thinstuff/rdpserver/scripts/rdp- server.init.d-template \
+    /etc/init.d/rdp-server
+
+    /usr/lib/lsb/install_initd /etc/init.d/rdp-server
+</code></pre>
+
+<p>Также, для дальнейшей работы представляют интерес следующие скрипты и
+директории:</p>
+
+<ul>
+<li>/opt/thinstuff/rdpserver/scripts/startall.sh Запустить сервер.</li>
+<li>/opt/thinstuff/rdpserver/scripts/stopall.sh Остановить сервер.</li>
+<li>/opt/thinstuff/rdpserver/scripts/init.sh Перезапустить сервер, действует так же, как остановка и последующий запуск.</li>
+<li>/opt/thinstuff/rdpserver/licenses/ В этой директории содержатся все текущие лицензии. Лицензии должно храниться только в этом месте; установить лицензию можно простым копированием или перемещением в это место. И для установки или удаления лицензии не требуется перезапускать сервер.</li>
+</ul>
+
+
+<p>LX Server администрируется и настраивается через веб-интерфейс. Итак,
+попробуем:</p>
+
+<p>[<img src="/media/images/2009/03/16/enter_lx.png" alt="" />]</p>
+
+<p>Для входа необходимо ввести следующие данные:</p>
+
+<p>Login — root
+Password - &lt;пароль пользователя root></p>
+
+<h3>Интерфейс</h3>
+
+<p>Интерфейс состоит из четырех частей.</p>
+
+<ul>
+<li><strong>Server Status</strong>Позволяет быстро определить существующие проблемы.</li>
+<li><strong>Sessions</strong>Показывает, какие пользователи используют сервисы, и позволяет управлять ими.</li>
+<li><strong>Rights</strong>Позволяет настроить права доступа к веб-интерфейсу.</li>
+<li><strong>Settings</strong>Здесь можно настроить параметры для терминального сервера и сессий.</li>
+</ul>
+
+
+<p>Предлагаю пройтись слегка по выше перечисленным пунктам и посмотреть, что они
+из себя представляют.</p>
+
+<p><strong>Server Status</strong></p>
+
+<p><strong>Server Health</strong></p>
+
+<p>[<img src="/media/images/2009/03/16/lx_server_health.png" alt="" />]</p>
+
+<p>В этом разделе можно получить общее представление о статусе терминального
+сервера. Для лучшего понимания статус подсвечивается, при возникновении
+проблем будет показано статусное сообщение.</p>
+
+<p>Существует четыре различных уровня статуса:</p>
+
+<ul>
+<li><p><strong>Running (зеленый)</strong> — Все работает без проблем.</p></li>
+<li><p><strong>Warning</strong> <strong>(желтый) </strong>— Сервер работает, но один или несколько компонентов испытывают сложности. Это позволяет отслеживать состояние сервера и определить временная ли это проблема или необходимо модернизировать сервер. Пробемы включают:</p>
+
+<ul>
+<li><p>Центральный процессор, память или другие ресурсы достигли критической точки.</p></li>
+<li><p>Один или несколько компонентов, но не все, сообщают об ошибках во время операций.</p></li>
+</ul>
+</li>
+<li><p><strong>Critical (красный)</strong> — Проблемы, подобные описанным в Warning, но они касаются всехрезервных и нерезервных компонентов.</p></li>
+<li><p><strong>Error (красный)</strong> — Один или несколько компонентов не работоспособны и сервер больше не дееспособен. Необходимо перезапустить терминальный сервер.</p></li>
+</ul>
+
+
+<p><strong>License Info</strong></p>
+
+<p>Во втором разделе секции отображается информация о ваших текущих лицензиях.
+Статус лицензий обозначается также цветами, значение которых мы вкратце и
+опишем:</p>
+
+<ul>
+<li><p><strong>Valid (зеленый)</strong> — Лицензия на данный момент действительна.</p></li>
+<li><p><strong>Grace (желтый)</strong> — Лицензия существует, но срок действия ее истечет в скором времени.</p></li>
+<li><p><strong>Invalid (красный)</strong> — Может иметь несколько причин (неверный hardware id , неверный файл лицензии&#8230;)</p></li>
+</ul>
+
+
+<p>[<img src="/media/images/2009/03/16/lx_license.png" alt="" />]</p>
+
+<p><strong>Sessions</strong></p>
+
+<p>[<img src="/media/images/2009/03/16/lx_sessions.png" alt="" />]</p>
+
+<p>В этой секции отображается список всех активных сессий и подключений к
+терминальному серверу. На данный момент у меня подключений нет, как видите.
+Каждая сессия может иметь ни одного, одно или больше подключений.</p>
+
+<p><strong>Rights</strong></p>
+
+<p><strong>Пользователи</strong></p>
+
+<p>[<img src="/media/images/2009/03/16/lx_rights.png" alt="" />]</p>
+
+<p>Вебсайт и терминальный сервер используют системных пользователей и их
+паролями. От себя могу сказать, что при тестовой установке на SLES 10, учетные
+записи пользователей на котором хранятся в LDAP, все эти учетные записи были
+совершенно прозрачно определены, мне не пришлось вводить какие-либо данные для
+подключения к серверу каталогов. Список пользователей синхронизируется с
+системным каждые несколько секунд, потому при добавлении нового пользователя
+он сможет в скором времени приступить к работе.</p>
+
+<p>Здесь же можно установить права для конкретного пользователя.</p>
+
+<p>[<img src="/media/images/2009/03/16/lx_user_rights.png" alt="" />]</p>
+
+<p><strong>Группы</strong></p>
+
+<p>[<img src="/media/images/2009/03/16/lx_groups.png" alt="" />]</p>
+
+<p>Список групп подобен списку пользователей. Он также синхронизируется с
+системным списком групп каждые несколько секунд. Также можно изменить права
+для конкретной группы, кликнув на Rights.</p>
+
+<p><strong>Settings</strong></p>
+
+<p>Эта секция позволяет настроить различные аспекты поведения LX Server: от
+интервала портов до различной оптимизации ЦП и пропускной способности.
+Существует два вида настроек:</p>
+
+<ul>
+<li><strong>Global Settings</strong></li>
+</ul>
+
+
+<p>Действуют глобально на весь сервер. Включают в себя в том числе и номер порта,
+который будет слушать сервер RDP.</p>
+
+<ul>
+<li><strong>Profile Settings</strong></li>
+</ul>
+
+
+<p>Они действуют только на конкретную сессию или подключение. Каждая сессия или
+подключение работает под конкретным профилем, и различные профили могут разные
+значения для этих настроек.</p>
+
+<p>Количество настроек, которые будут отображаться, зависит от уровня просмотра,
+котрых существует три:</p>
+
+<ul>
+<li>Level 0 (Standard) — Содержит только часто используемые настройки.</li>
+<li>Level 1 (Advanced) — Содержит настройки, присутствующие в Level 0 и дополнительные настройки, контролирующие поведение сервера.</li>
+<li>Level 2 (Expert) — Содержит все настройки.</li>
+</ul>
+
+
+<p>[<img src="/media/images/2009/03/16/lx_global_set.png" alt="" />]</p>
+
+<p><strong>Global Settings</strong></p>
+
+<p>Это настройки, необходимые серверы во время запуска.</p>
+
+<p><strong>Profiles</strong></p>
+
+<p>Часто бывает необходимо указать настройки для конкретного пользователя,
+подключенного к серверу, в зависимости от того оборудования, которое этот
+пользователь имеет. Для обеспечения этой возможности у терминального сервера
+существует концепция профилей. Каждый профиль хранит набор значений настроек,
+и когда пользователь подключается к серверу, этот профиль выбирается.
+Количество необходимых профилей зависит от конкретного случая, но, в основном,
+создается один профиль для каждой группы пользователей, которым необходимы
+различные настройки.</p>
+
+<p><strong>Settings</strong></p>
+
+<p>[<img src="/media/images/2009/03/16/lx_settings.png" alt="" />]</p>
+
+<p>Используя Мастер Настроек наиболее общие установки легким способом.</p>
+
+<p><strong>Advanced Settings</strong></p>
+
+<p>В этой секции вы можете как изменить настройки профиля, так и управлять этими
+профилями.</p>
+
+<p>[<img src="/media/images/2009/03/16/lx_advsettings.png" alt="" />]</p>
+
+<p>Поскольку я не вижу смысла в данном документе описывать все подробности всех
+вариантов настроек, тем более что они могут сильно зависить от конкретных
+требований, то ограничиваюсь кратким описанием. На сайте Thinstuff выложена
+достаточно подробная и понятная документация. Она, правда, на английском
+языке, но особых сложностей в тексте нет, потому вполне понятна. Ссылки на
+документацию смотрите в конце этого руководства.</p>
+
+<h2>Подключение</h2>
+
+<p>Теперь, когда практически все готово, можно попробовать подключиться к
+серверу. В Linux-клиенте будем использовать для этого Gnome-RDP, в Windows —
+встроенный клиент RDP. В целом, могу сказать, что в подключении сложности нет
+никакой, при условии, что все предыдущие шаги проделаны верно. И есть еще один
+момент, на машине, на которую устанавливали RDP-сервер, не забудьте открыть
+порты 3389 tcp и 3389 udp.</p>
+
+<p>Итак:</p>
+
+<p>[<img src="/media/images/2009/03/16/gnome-RDP.png" alt="" />]</p>
+
+<p>Для начала подключимся к тестовому серверу на этой же машине.</p>
+
+<p>[<img src="/media/images/2009/03/16/gnome-rdp-session.png" alt="" />]</p>
+
+<p>[<img src="/media/images/2009/03/16/gnome-rdp-rdp.png" alt="" />]</p>
+
+<p>На двух верхним рисунках показаны мои настройки. В принципе, они практически
+дефолтные.</p>
+
+<p>[<img src="/media/images/2009/03/16/rdesktop%20-%20192.168.1.7.png" alt="" />]</p>
+
+<p>В открывшемся окне вводим имя пользователя и пароль и&#8230;</p>
+
+<p>[<img src="/media/images/2009/03/16/screenshot-desktop.png" alt="" />]</p>
+
+<p>Получаем Рабочий стол на Рабочем столе.</p>
+
+<p>[<img src="/media/images/2009/03/16/Screenshot.png" alt="" />]</p>
+
+<p>А тут Opera запущенная на «удаленном Рабочем Столе».</p>
+
+<p>Стоит заменить, что можно входить и под пользователем, вход которого уже
+выполнен. Работа проходит фактически параллельно. Правда, если попытаться
+запустить Firefox, который уже был запущен при основном входе, то получится
+вот что:</p>
+
+<p>[<img src="/media/images/2009/03/16/Screenshot-Close%20Firefox.png" alt="" />]</p>
+
+<h2>Заключение</h2>
+
+<p>Честно говоря, опыт использования LX Server у меня не большой. Да и, по
+большому счету, этот опыт сводится к тестовому использованию его в пределах
+локальной сети на работе. Поскольку я ставил RDP-сервер на арендованный сервер
+в дата-центре, то была возможность попробовать поработать через сеть Интернет.
+С достаточно нормальным подключением, а на работе канал 2 мегабита, работать
+можно нормально. Если местами и подтормаживает, то не сильно и не критично. Но
+при выходе в Интернет через телефон с подключением к оператору «Скайлинк» в
+зоне 1х (если кто не в курсе, скорость до 153 килобит), работа с удаленным
+сервером не комфортна совершенно. Отображение раочего стола тормозит очень
+заметно. Правда, я не искал и не пытался настроить сам сервер, возможно и есть
+варианты, но подсказать на данный момент не могу ничего конкретного.</p>
+
+<p>Мой вердикт будет таковым: достаточно хороший вариант для локальной сети,
+допустим для сервера 1С. Тем более, что сейчас 1С можно использовать
+установленным на Linux и в версии терминального сервера от Thinstuff для ОС
+Linux нет ограничения работоспособности по времени, только по клиентам. В
+Windows-версии, напомню, ограничение в 14 дней. Хотя и в том, и в другом
+варианте лицензионным соглашением запрещено использование тестовой версии на
+производстве.</p>
+
+<p>Использование же подключения к действительно удаленному серверу возможно
+исключительно при достаточно адекватной скорости подключения к сети Интернет,
+в любом другом случае возможны проблемы.</p>
+
+<hr />
+
+<p>При написание статьи использовалось:</p>
+
+<ol>
+<li><a href="http://www.thinstuff.com/releases/lxserver-1.2.1-5366.sh">Дистрибутив Thinstuff LX Server</a></li>
+<li><a href="http://www.thinstuff.com/releases/lx_server_manual-5366.pdf">LX Server Manual</a></li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hrafn</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-16T12:22:03+03:00" pubdate data-updated="true">Mar 16<span>th</span>, 2009</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hrafn.me/articles/setup-thinstuff-lx-server" data-via="" data-counturl="http://hrafn.me/articles/setup-thinstuff-lx-server" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/2009/03/lx-server-ot-thinstuff" title="Previous Post: LX Server от Thinstuff">&laquo; LX Server от Thinstuff</a>
+      
+      
+        <a class="basic-alignment right articlenav" href="/2009/04/broadcom-wireless-drivers-dlya-sled-11" title="Next Post: Broadcom Wireless Drivers для SLED 11">Broadcom Wireless Drivers для SLED 11 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-search-and-databags">Основы Chef. Поиск и Data Bags</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-introduction-to-cookbooks">Основы Chef. Введение в "Поваренные книги"</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-core-components">Основы Chef. Базовые компоненты</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-architecture">Основы Chef. Введение в архитектуру</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/about-blog-design">Немного про дизайн</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/103291489173191931572?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Alexander 'Hrafn' Ivanov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

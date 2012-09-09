@@ -1,0 +1,469 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>kvm, bridge и виртуальные машины - Hrafn.me</title>
+  <meta name="author" content="Alexander 'Hrafn' Ivanov">
+
+  
+  <meta name="description" content="Полноценной статьи не будет. Тем более, что и писать об установке очередную
+статью писать смысла не вижу. Подобные вещи описаны в большом количестве &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hrafn.me/2009/10/kvm-bridge-i-virtualnye-mashiny">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hrafnme" rel="alternate" title="Hrafn.me" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  <!-- Piwik --> 
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://stat.alexfinn.eu/" : "http://stat.alexfinn.eu/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 3);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://stat.alexfinn.eu/piwik.php?idsite=3" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft"></div>
+  	<div id="logoText"></div>
+  	<div id="logoRight"></div>
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">Hrafn.me</a></h1>
+  
+    <h2>...</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hrafnme" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hrafn.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/docs">Docs</a></li>
+  <li><a href="/lpi">LPI</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">Kvm, Bridge и виртуальные машины</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-04T15:06:16+03:00" pubdate data-updated="true">Dec 4<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Полноценной статьи не будет. Тем более, что и писать об установке очередную
+статью писать смысла не вижу. Подобные вещи описаны в большом количестве в
+Сети и на русском, и на английском. Посему больше хотелось бы написать про те
+вопросы, которые возникли у меня.</p>
+
+<p>Итак, дело обстоит так - есть достаточно мощный сервер: Core i7, 8 гигабайт
+оперативки и 1.5 терабайта места. Необходимо поднять на нем виртуальную
+машину, операционка в которой будет иметь внешний IP-адрес. И, самый главный
+момент, сервер удаленный. Доступ к нему имеется исключительно по SSH.</p>
+
+<!--more-->
+
+
+<p>По идее сложного ничего нет. Но некоторые вещи были для меня настолько не
+очевидны (сам, конечно, виноват, признаю), что пришлось потратить на все это
+дело какое-то время. Начнем с того, что до этого момента мне с бриджем
+сталкиваться не приходилось. Вот не приходилось и все. Кстати, в качестве
+операционной системы для хоста был выбран Дебиан, поэтому относительно этого
+дистрибутива описания и будут.</p>
+
+<p>В качестве системы виртуализации я остановился на KVM. Во-первых, потому что
+уже в ядре, во-вторых, по моим личным ощущениям работает чуть быстрее и менее
+нагружает систему, чем Xen. Может и не прав я, но все же.</p>
+
+<p>Процесс установки KVM описывать не буду, как я и говорил, статей написано уже
+море. Первый момент был таков: раз нужен внешний айпишник на виртуалке, значит
+без бриджа не обойтись. Но&#8230; Сервер удаленный, я мосты не поднимал никогда, и
+в случае каких-либо проблем связь с машиной будет потеряна. Особых проблем это
+не доставит, есть возможность удаленного включения Rescue Mode, но это
+занимает времени не мало. После нескольких попыток попробовать поднять бридж и
+нескольких возвратов конфигурации после невозможности поднять сеть на сервере,
+я вдруг вспомнил про возможность дать интерфейсу алиас. Это позволяло
+настраивать бридж безболезненно для основного интерфейса. Итак, несколько
+листингов будет.</p>
+
+<p>напомню, что в Дебиане сетевые настройки расположены в файле
+/etc/network/interfaces.</p>
+
+<pre><code>    # Loopback device:
+    auto lo
+    iface lo inet loopback
+
+    # device: eth0
+    #auto  eth0
+    #iface eth0 inet static
+    #  address   88.198.52.135
+    #  broadcast 88.198.52.159
+    #  netmask   255.255.255.224
+    #  gateway   88.198.52.129
+
+    auto eth0
+    iface eth0 inet manual
+    auto br0
+    iface br0 inet static
+    address   88.198.52.135
+    netmask   255.255.255.224
+    network   88.198.52.128
+    broadcast 88.198.52.159
+    gateway   88.198.52.129
+    bridge_ports eth0
+    bridge_fd 9
+    bridge_hello 2
+    bridge_maxage 12
+    bridge_stp off
+
+    # default route to access subnet
+    up route add -net 88.198.52.128 netmask 255.255.255.224 gw 88.198.52.129 eth0
+
+    # Loopback device:
+    auto lo
+    iface lo inet loopback
+
+    # device: eth0
+    auto  eth0
+    iface eth0 inet static
+    address   xx.xx.xx.135
+    broadcast xx.xx.xx.159
+    netmask   255.255.255.224
+    gateway   xx.xx.xx.129
+</code></pre>
+
+<p>Это настройки системы по умолчанию. Добавим алиас. Для этого допишем
+следующее:</p>
+
+<pre><code>    # device: eth0:0
+    auto  eth0:0
+    iface eth0 inet static
+    address   xx.xx.xx.151
+    broadcast xx.xx.xx.159
+    netmask   255.255.255.224
+</code></pre>
+
+<p>После редактирования конфига перезапускаем сеть и проверяем, что интерфейс
+eth0 имеет алиас.</p>
+
+<p>Теперь можно баловаться с бриджем. Снова открываем тот же файл и приводим его
+к такому виду:</p>
+
+<pre><code>    # Loopback device:
+    auto lo
+    iface lo inet loopback
+
+    # device: eth0
+    auto  eth0
+    iface eth0 inet static
+    address   xx.xx.xx.135
+    broadcast xx.xx.xx.159
+    netmask   255.255.255.224
+    gateway   xx.xx.xx.129
+
+    auto eth0:0
+    iface eth0:0 inet manual
+
+    auto br0
+    iface br0 inet static
+    address   xx.xx.xx.151
+    netmask   255.255.255.224
+    network   xx.xx.xx.128
+    broadcast xx.xx.xx.159
+    gateway   xx.xx.xx.129
+    bridge_ports eth0:0
+
+    # default route to access subnet
+    up route add -net xx.xx.xx.128 netmask 255.255.255.224 gw xx.xx.xx.129 eth0
+</code></pre>
+
+<p>Сохраняем и перезапускаем сеть. Можно перегрузиться даже для того, чтобы
+убедиться, что все нормально поднимается. Если будут какие-то ошибки, смотрим
+логи и исправляем.</p>
+
+<p>Если же все прошло нормально, после перезагрузки сеть поднялась и сервер
+доступен и пингуется обеим IP-адресам, то самое время снова поправить конфиг,
+удалив оттуда алиас и подняв мост уже на основном интерфейсе. У меня в итоге
+получилось вот так:</p>
+
+<pre><code>    # Loopback device:
+    auto lo
+    iface lo inet loopback
+
+    # device: eth0
+    auto eth0
+    iface eth0 inet manual
+
+    auto br0
+    iface br0 inet static
+    address   xx.xx.xx.135
+    netmask   255.255.255.224
+    network   xx.xx.xx.128
+    broadcast xx.xx.xx.159
+    gateway   xx.xx.xx.129
+    bridge_ports eth0
+
+    # default route to access subnet
+    up route add -net xx.xx.xx.128 netmask 255.255.255.224 gw xx.xx.xx.129 eth0
+</code></pre>
+
+<p>Очередная перезагрузка, дабы убедиться, что все в порядке и работает
+нормально. И смотрим вывод inconfig:</p>
+
+<pre><code>    br0       Link encap:Ethernet  HWaddr 40:61:86:2b:87:a6
+    inet addr:xx.xx.xx.135  Bcast:xx.xx.xx.159  Mask:255.255.255.224
+    inet6 addr: fe80::4261:86ff:fe2b:87a6/64 Scope:Link
+    UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+    RX packets:76585400 errors:0 dropped:0 overruns:0 frame:0
+    TX packets:83969297 errors:0 dropped:0 overruns:0 carrier:0
+    collisions:0 txqueuelen:0
+    RX bytes:41794612663 (41.7 GB)  TX bytes:61647808570 (61.6 GB)
+
+    eth0      Link encap:Ethernet  HWaddr 40:61:86:2b:87:a6
+    inet6 addr: fe80::4261:86ff:fe2b:87a6/64 Scope:Link
+    UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+    RX packets:43576052 errors:0 dropped:0 overruns:0 frame:0
+    TX packets:45777515 errors:0 dropped:0 overruns:0 carrier:0
+    collisions:0 txqueuelen:1000
+    RX bytes:29177835387 (29.1 GB)  TX bytes:32751417722 (32.7 GB)
+    Interrupt:249 Base address:0x2000
+
+    lo        Link encap:Local Loopback
+    inet addr:127.0.0.1  Mask:255.0.0.0
+    inet6 addr: ::1/128 Scope:Host
+    UP LOOPBACK RUNNING  MTU:16436  Metric:1
+    RX packets:233995 errors:0 dropped:0 overruns:0 frame:0
+    TX packets:233995 errors:0 dropped:0 overruns:0 carrier:0
+    collisions:0 txqueuelen:0
+    RX bytes:870168643 (870.1 MB)  TX bytes:870168643 (870.1 MB)
+
+    vnet0     Link encap:Ethernet  HWaddr 76:8c:af:d9:40:b6
+    inet addr:192.168.122.1  Bcast:192.168.122.255  Mask:255.255.255.0
+    inet6 addr: fe80::748c:afff:fed9:40b6/64 Scope:Link
+    UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+    RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+    TX packets:6 errors:0 dropped:0 overruns:0 carrier:0
+    collisions:0 txqueuelen:0
+    RX bytes:0 (0.0 B)  TX bytes:468 (468.0 B)
+</code></pre>
+
+<p>Вот и готово. Теперь можно ставить систему в виртуальную машину, выбрав в
+качестве способа подключения к сети существующий на данный момент bridge.</p>
+
+<p>И на последок есть маленькое замечание о настройке сети уже в виртуалке. У
+меня после установки операционной системы в виртуальной машине не пинговался
+присвоенный ей IP-адрес. Причина оказалась достаточно банальна - маршрут по
+умолчанию. Полные сетевые настройки с виртуалки я приводить не буду, только
+одну строку:</p>
+
+<pre><code>    gateway xx.xx.xx.135
+</code></pre>
+
+<p>Здесь в качестве шлюза выступает созданный ранее мост.</p>
+
+<p>Да возможно проблемы и с мостом, и с настройкой сети несколько надуманные. Но
+я с ними столкнулся и потратил n-ное количество времени на их решение. Может
+быть кому-то пригодится и он, этот кто-то, съэкономит себе время. Я буду
+только рад. :)</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hrafn</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-04T15:06:16+03:00" pubdate data-updated="true">Dec 4<span>th</span>, 2009</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hrafn.me/2009/10/kvm-bridge-i-virtualnye-mashiny" data-via="" data-counturl="http://hrafn.me/2009/10/kvm-bridge-i-virtualnye-mashiny" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/2009/10/oshibki-pri-obnovlenii-ili-registracii" title="Previous Post: SLE 11. Ошибки при обновлении или регистрации">&laquo; SLE 11. Ошибки при обновлении или регистрации</a>
+      
+      
+        <a class="basic-alignment right articlenav" href="/2009/12/wi-fi-bcm4311-i-sled11" title="Next Post: Wi-Fi, BCM4311 и SLED 11">Wi-Fi, BCM4311 и SLED 11 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-search-and-databags">Основы Chef. Поиск и Data Bags</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-introduction-to-cookbooks">Основы Chef. Введение в "Поваренные книги"</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-core-components">Основы Chef. Базовые компоненты</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-architecture">Основы Chef. Введение в архитектуру</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/about-blog-design">Немного про дизайн</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/103291489173191931572?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Alexander 'Hrafn' Ivanov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

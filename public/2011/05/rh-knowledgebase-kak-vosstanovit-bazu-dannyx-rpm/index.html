@@ -1,0 +1,305 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[RH Knowledgebase] Как восстановить базу данных RPM - Hrafn.me</title>
+  <meta name="author" content="Alexander 'Hrafn' Ivanov">
+
+  
+  <meta name="description" content="Перевод заметки из базы знаний Red Hat: DOC-6904 (https://access.redhat.com/kb/docs/DOC-6904) Иногда база данных RPM &#8220;залипает&#8221;. Одной из &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hrafn.me/2011/05/rh-knowledgebase-kak-vosstanovit-bazu-dannyx-rpm">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hrafnme" rel="alternate" title="Hrafn.me" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  <!-- Piwik --> 
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://stat.alexfinn.eu/" : "http://stat.alexfinn.eu/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 3);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://stat.alexfinn.eu/piwik.php?idsite=3" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft"></div>
+  	<div id="logoText"></div>
+  	<div id="logoRight"></div>
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">Hrafn.me</a></h1>
+  
+    <h2>...</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hrafnme" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hrafn.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/docs">Docs</a></li>
+  <li><a href="/lpi">LPI</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">[RH Knowledgebase] Как восстановить базу данных RPM</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-05-05T15:00:11+04:00" pubdate data-updated="true">May 5<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Перевод заметки из базы знаний Red Hat: DOC-6904 (<a href="https://access.redhat.com/kb/docs/DOC-6904">https://access.redhat.com/kb/docs/DOC-6904</a>)</p>
+
+<!--more-->
+
+
+<p>Иногда база данных RPM &#8220;залипает&#8221;. Одной из причин этой проблемы - убийство процесса, работающего с базой данных, что приводит к неверной информации о состоянии блокировки и ограничению доступа последующих процессов к базе
+данных. Так что, необходимо убедиться, что процесс действительно завис до
+того, как убить его - если процесс использует большое количество процессорного
+времени, то возможно, что он продолжает выполнять полезную работу. Информация
+о состоянии блокировки должна быть восстановлена вручную, чтобы устранить
+&#8220;зависание&#8221; и позволить rpm нормально функционировать.</p>
+
+<p>&#8220;Убийство&#8221; процесса (иногда это происходит при пропадании электропитания,
+иногда происходит в случае падения стороннего программного обеспечения без
+очистки информации о состоянии блокировки при выходе, иногда из-за
+нетерпеливого администратора) может привести к небольшим повреждениям базы
+данных RPM &#8216;SleepyCat db&#8217;. В таком случае, необходимо удалить файлы, хранящие
+информацию о состоянии блокировки (эти файлы начинают с двух нижних
+подчеркиваний, например, &#8220;__db&#8221;). Так как эти файлы автоматически создаются
+заново при отсутствии, это достаточно безопасная операция.</p>
+
+<p><strong>Предупреждение: очень</strong> важно убедиться, что никакой запущенных процесс не обращается к базе данных RPM, перед тем, как удалять &#8216;/var/lib/rpm/<strong>db*&#8217;. Если такая проверка затруднена, удаление </strong>db* должно производиться в single user mode. В действительности, init-скрипты RHEL делают это автоматически, так перезагрузки обычно достаточно.</p>
+
+<p>Далее с осторожностью проделайте следующее:</p>
+
+<ol>
+<li><p>Перед попыткой восстановления базы, СНАЧАЛА сделайте резерную копию.</p>
+
+<p> # cd /var/lib
+ # tar zcvf /var/preserve/rpmdb-[today&#8217;s date].tar.gz rpm</p></li>
+<li><p>Проверьте целостность с помощью</p>
+
+<pre><code> # cd /var/lib/rpm
+ # rm -f __db*
+ # /usr/lib/rpm/rpmdb_verify Packages
+</code></pre></li>
+<li><p>Далее проделайте следующее:</p>
+
+<p> # mv Packages Packages.orig</p>
+
+<pre><code> # /usr/lib/rpm/rpmdb_dump Packages.orig | /usr/lib/rpm/rpmdb_load Packages
+ # /usr/lib/rpm/rpmdb_verify Packages
+ # rpm -qa
+</code></pre></li>
+<li><p>И в итоге восстановите базу данных</p>
+
+<p> # rpm -vv &#8211;rebuilddb</p></li>
+</ol>
+
+
+<p><strong>Дополнительная информация:</strong> Подробные заметки о восстановлении базы данных RPM можно найти здесь: <a href="http://people.redhat.com/berrange/notes/rpmrecovery.html">http://people.redhat.com/berrange/notes/rpmrecovery.html</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hrafn</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-05-05T15:00:11+04:00" pubdate data-updated="true">May 5<span>th</span>, 2011</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hrafn.me/2011/05/rh-knowledgebase-kak-vosstanovit-bazu-dannyx-rpm" data-via="" data-counturl="http://hrafn.me/2011/05/rh-knowledgebase-kak-vosstanovit-bazu-dannyx-rpm" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/2011/05/usb-3-0-support-in-red-hat" title="Previous Post: [RH Knowledgebase] USB 3.0 support in Red Hat">&laquo; [RH Knowledgebase] USB 3.0 support in Red Hat</a>
+      
+      
+        <a class="basic-alignment right articlenav" href="/2011/06/bridge-kvm-again" title="Next Post: [RH Knowledgebase] Упрощенная настройка bridge для KVM">[RH Knowledgebase] Упрощенная настройка bridge для KVM &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-search-and-databags">Основы Chef. Поиск и Data Bags</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-introduction-to-cookbooks">Основы Chef. Введение в "Поваренные книги"</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-core-components">Основы Chef. Базовые компоненты</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-architecture">Основы Chef. Введение в архитектуру</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/about-blog-design">Немного про дизайн</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/103291489173191931572?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Alexander 'Hrafn' Ivanov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

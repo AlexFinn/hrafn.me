@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Отображение шрифтов в openSUSE 12.1 - Hrafn.me</title>
+  <meta name="author" content="Alexander 'Hrafn' Ivanov">
+
+  
+  <meta name="description" content="Немного скажу касательно отображения шрифтов в последней, на данный момент, версии openSUSE - 12.1.
+Собственно, дело в том, что говорить-то особо и &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://hrafn.me/2012/01/opensuse-12-1-fonts">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/hrafnme" rel="alternate" title="Hrafn.me" type="application/atom+xml">
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  <!-- Piwik --> 
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://stat.alexfinn.eu/" : "http://stat.alexfinn.eu/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 3);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://stat.alexfinn.eu/piwik.php?idsite=3" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="logo">
+  	<div id="logoLeft"></div>
+  	<div id="logoText"></div>
+  	<div id="logoRight"></div>
+  	<div class="clear"></div>
+  </div>
+  <h1><a href="/">Hrafn.me</a></h1>
+  
+    <h2>...</h2>
+  
+  <div class="clear"></div>
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/hrafnme" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:hrafn.me" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archives</a></li>
+  <li><a href="/docs">Docs</a></li>
+  <li><a href="/lpi">LPI</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">Отображение шрифтов в openSUSE 12.1</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-02T00:00:00+04:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Немного скажу касательно отображения шрифтов в последней, на данный момент, версии openSUSE - 12.1.
+Собственно, дело в том, что говорить-то особо и не о чем. Поэтому и ранее не писал ничего на эту тему, хотя у меня на ноутбуке установлена именно эта версия дистрибутива практически с того момента, как она вышла в свет. Почему я использую сейчас именно этот дистрибутив - это отдельная история. Быть может позже я про это тоже напишу, но сейчас тема немного другая.</p>
+
+<!--more-->
+
+
+<p>В предыдущих версиях openSUSE настроить адекватное, на мой взгляд, отображение шрифтов можно было, но несколько сложно. Требовалось много лишних телодвижений, а в итоге результат далеко не всегда получался именно таким, какой хотелось бы видеть. Впрочем, стоит отметить, что с каждым релизом ситуация все больше улучшалась. К сожалению, в основном это было связано не с тем, что разработчики озаботились этим вопросом каким-либо образом, а с тем, что в других дистрибутивах ситуация начала слегка меняться. Сначала разработчики Ubuntu показали очень хороший результат. Потом миру стали известны патчи от Infinality, которые сначала начали применяться в Fedora, а позже появились и в OBS от проекта openSUSE.
+Я видел и пробовал и то, и другое. Шрифты с патчами от Infinality в целом смотрелись чуть лучше, но их результат в итоге получался более точечным. Т.е. в некоторых приложениях шрифты смотрелись просто отлично, где-то похуже, а где-то результат применения патчей был не видел совсем.
+В отличие от Infinality патчи применяющиеся в Ubuntu давали более комплексный результат. Возможно, это зависит от каких-то дополнительно установленных пакетов, но столько глубоко я не закапывался, кроме того, пакеты в различных дистрах разбиваются на более мелкие совсем по-разному.
+Теперь что касается шрифтов в openSUSE 12.1. Упоминающийся далее репозиторий я как-то пробовал использовать в более ранних версиях openSUSE, но результат был несколько далек от ожидаемого. Сейчас все совершенно изменилось. Про что я сейчас и напишу :)</p>
+
+<p>Для получения нужного результата достаточно подключить следующий репозиторий: <a href="http://opensuse-community.org/subpixel/openSUSE_12.1/">Subpixel.repo</a>
+Например, скачиваем файл (http://opensuse-community.org/subpixel/openSUSE_12.1/Subpixel.repo) в /etc/zypp/repos.d/ и ставим пакеты из подключенного репозитория. Как минимум, потребуется:</p>
+
+<ul>
+<li>fontconfig-2.8.0-88.1.x86_64.rpm</li>
+<li>fontconfig-feature-subpixel-hinting-2.8.0-88.1.x86_64.rpm</li>
+<li>freetype2-feature-subpixel-hinting-2.4.7-666.1.x86_64.rpm</li>
+<li>libpixman-1-0-0.22.2-666.1.x86_64.rpm</li>
+</ul>
+
+
+<p>Остальные необходимые подтянутся по зависимостям. В процессе установки будет задан вопрос о смене поставщика. На него требуется ответить согласием.
+После установки будет необходимо или перегрузиться, или, как минимум, перезапустить Х-сервер для применения новых настроек шрифтов.</p>
+
+<p>Как я уже писал однажды, мне предпочтительны следующие шрифты: Droid, Roboto, Liberation. А, например, при написании этой заметки в Gedit использовался PT Mono. В общем, пробуйте, вкусы-то разные у всех. :)</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">hrafn</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-01-02T00:00:00+04:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://hrafn.me/2012/01/opensuse-12-1-fonts" data-via="" data-counturl="http://hrafn.me/2012/01/opensuse-12-1-fonts" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left articlenav" href="/2011/12/change-blog-engine" title="Previous Post: Смена движка блога прошла успешно">&laquo; Смена движка блога прошла успешно</a>
+      
+      
+        <a class="basic-alignment right articlenav" href="/2012/02/19/new-design" title="Next Post: Новый дизайн и смена структуры">Новый дизайн и смена структуры &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-search-and-databags">Основы Chef. Поиск и Data Bags</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-introduction-to-cookbooks">Основы Chef. Введение в "Поваренные книги"</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-core-components">Основы Chef. Базовые компоненты</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/chef-basics-architecture">Основы Chef. Введение в архитектуру</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/04/about-blog-design">Немного про дизайн</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/103291489173191931572?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Alexander 'Hrafn' Ivanov -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
