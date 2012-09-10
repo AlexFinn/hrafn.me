@@ -2,6 +2,7 @@
 layout: post
 title: Основы Chef. Введение в архитектуру
 permalink: /2012/04/chef-basics-architecture
+comments: true
 categories:
 - chef
 - translate

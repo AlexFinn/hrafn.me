@@ -2,6 +2,7 @@
 layout: post
 title: Основы Chef. Базовые компоненты
 permalink: /2012/04/chef-basics-core-components
+comments: true
 categories:
 - chef
 - translate

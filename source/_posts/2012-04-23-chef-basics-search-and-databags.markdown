@@ -2,6 +2,7 @@
 layout: post
 title: Основы Chef. Поиск и Data Bags
 permalink: /2012/04/chef-basics-search-and-databags
+comments: true
 categories:
 - chef
 - howto

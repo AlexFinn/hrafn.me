@@ -2,6 +2,7 @@
 layout: post
 title: Основы Chef. Введение в "Поваренные книги"
 permalink: /2012/04/chef-basics-introduction-to-cookbooks
+comments: true
 categories:
 - chef
 - howto
