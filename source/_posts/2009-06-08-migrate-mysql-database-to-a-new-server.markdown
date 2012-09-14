@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2009-06-08T17:01:41+0400
 permalink: /2009/06/migrate-mysql-database-to-a-new-server
+comments: true
 categories:
 - tips
 - database

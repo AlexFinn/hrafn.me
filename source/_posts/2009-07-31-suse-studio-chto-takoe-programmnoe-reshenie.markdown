@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2009-07-31T20:35:57+0400
 permalink: /2009/07/suse-studio-chto-takoe-programmnoe-reshenie
+comments: true
 categories:
 - suse
 - susestudio

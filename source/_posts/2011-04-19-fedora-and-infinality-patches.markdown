@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2011-04-19T09:17:27+0000
 permalink: /2011/04/fedora-and-infinality-patches
+comments: true
 categories:
 - fedora
 - fonts

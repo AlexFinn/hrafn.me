@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2011-01-12T09:42:47+0000
 permalink: /2011/01/lts-ili-ne-lts-vot-v-chem-vopros
+comments: true
 categories:
 - linux
 - support

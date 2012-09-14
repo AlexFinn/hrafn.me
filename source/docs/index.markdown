@@ -2,8 +2,8 @@
 layout: page
 title: "Docs"
 date: 2012-09-02 17:34
-comments: true
-sharing: true
+comments: false
+sharing: false
 footer: true
 ---
 **Переводы (в формате PDF):**

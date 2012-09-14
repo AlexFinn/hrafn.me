@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-05-06T11:47:17+0000
 permalink: /2010/05/otklyuchenie-ikonki-printera-na-servere-samba
+comments: true
 categories:
 - samba
 - printing

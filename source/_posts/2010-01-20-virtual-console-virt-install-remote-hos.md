@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-01-20T14:31:01+0000
 permalink: /2010/01/virtual-console-virt-install-remote-host
+comments: true
 categories:
 - rhel
 - translate

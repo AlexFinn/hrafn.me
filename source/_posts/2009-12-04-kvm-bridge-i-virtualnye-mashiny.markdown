@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2009-12-04T15:06:16+0300
 permalink: /2009/10/kvm-bridge-i-virtualnye-mashiny
+comments: true
 categories:
 - kvm
 - network

@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2009-05-23T15:10:29+0400
 permalink: /2009/05/mbr-master-boot-record-backup-restore
+comments: true
 categories:
 - mbr
 - howto

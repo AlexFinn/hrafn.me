@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2011-05-05T11:00:11+0000
 permalink: /2011/05/rh-knowledgebase-kak-vosstanovit-bazu-dannyx-rpm
+comments: true
 categories:
 - rhel
 - rpm

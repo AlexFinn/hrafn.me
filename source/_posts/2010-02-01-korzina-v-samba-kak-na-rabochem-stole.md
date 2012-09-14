@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-02-01T08:37:27+0000
 permalink: /2010/02/korzina-v-samba-kak-na-rabochem-stole
+comments: true
 categories:
 - samba
 - howto

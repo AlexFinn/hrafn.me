@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-11-30T08:18:40+0000
 permalink: /articles/package-management-in-rhel6-yum
+comments: true
 categories:
 - rhel
 - yum

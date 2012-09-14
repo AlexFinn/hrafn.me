@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-11-11T12:25:28+0000
 permalink: /2010/11/email-from-red-hat
+comments: true
 categories:
 - redhat
 - rhcsa

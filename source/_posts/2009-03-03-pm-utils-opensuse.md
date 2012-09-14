@@ -2,6 +2,7 @@
 layout: post
 title: pm-utils — openSUSE
 permalink: /2009/03/pm-utils-opensuse
+comments: true
 categories:
 - hibernate
 - suspend

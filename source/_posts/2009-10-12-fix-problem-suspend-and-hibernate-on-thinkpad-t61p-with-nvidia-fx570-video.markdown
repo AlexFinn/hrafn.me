@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2009-10-12T15:26:38+0400
 permalink: /2009/10/fix-problem-suspend-and-hibernate-on-thinkpad-t61p-with-nvidia-fx570-video
+comments: true
 categories:
 - suspend
 - hibernate

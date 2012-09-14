@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2009-10-20T01:25:44+0400
 permalink: /2009/10/sles-security-guide-auth-pam-pdf
+comments: true
 categories:
 - suse
 - security

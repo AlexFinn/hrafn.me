@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-04-01T19:27:59+0000
 permalink: /2010/04/virt-manager-0-8-4-i-novye-guevye-vozmozhnosti
+comments: true
 categories:
 - virtualization
 - virt-manager

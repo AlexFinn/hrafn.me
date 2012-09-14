@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-02-25T10:38:04+0000
 permalink: /2010/02/yum-ustanovka-i-obnovlenie-paketov-iz-sobstvennogo-repozitoriya
+comments: true
 categories:
 - yum
 - software

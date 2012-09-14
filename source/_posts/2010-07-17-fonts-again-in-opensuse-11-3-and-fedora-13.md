@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-07-17T21:19:06+0000
 permalink: /2010/07/fonts-again-in-opensuse-11-3-and-fedora-13
+comments: true
 categories:
 - suse
 - fedora

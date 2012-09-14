@@ -2,8 +2,8 @@
 layout: page
 title: "LPI"
 date: 2012-09-02 17:26
-comments: true
-sharing: true
+comments: false
+sharing: false
 footer: true
 ---
 Руководства по подготовке к сдаче экзаменов LPI

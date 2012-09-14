@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-02-26T11:51:15+0000
 permalink: /2010/02/samba-ldap-not-indexed
+comments: true
 categories:
 - samba
 - ldap

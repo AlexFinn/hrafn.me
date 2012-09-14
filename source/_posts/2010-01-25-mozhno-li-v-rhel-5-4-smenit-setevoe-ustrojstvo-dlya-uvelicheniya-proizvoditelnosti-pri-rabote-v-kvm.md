@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-01-25T11:23:14+0000
 permalink: /2010/01/mozhno-li-v-rhel-5-4-smenit-setevoe-ustrojstvo-dlya-uvelicheniya-proizvoditelnosti-pri-rabote-v-kvm
+comments: true
 categories:
 - rhel
 - kvm

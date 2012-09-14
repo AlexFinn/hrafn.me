@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2011-05-04T10:57:54+0000
 permalink: /2011/05/usb-3-0-support-in-red-hat
+comments: true
 categories:
 - rhel
 - hardware

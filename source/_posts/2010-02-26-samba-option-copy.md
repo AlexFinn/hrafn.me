@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-02-26T12:39:18+0000
 permalink: /2010/02/samba-option-copy
+comments: true
 categories:
 - samba
 - translate

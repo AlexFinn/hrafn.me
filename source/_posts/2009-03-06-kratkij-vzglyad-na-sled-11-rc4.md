@@ -2,6 +2,7 @@
 layout: post
 title: Краткий взгляд на SLED 11 RC4
 permalink: /2009/03/kratkij-vzglyad-na-sled-11-rc4
+comments: true
 categories:
 - suse
 - overview

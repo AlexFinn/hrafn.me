@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-03-30T14:04:42+0000
 permalink: /2010/03/specii-dlya-virtualok
+comments: true
 categories:
 - spice
 - kvm

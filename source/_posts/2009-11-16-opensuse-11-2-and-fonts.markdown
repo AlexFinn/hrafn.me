@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2009-11-16T12:12:42+0300
 permalink: /2009/10/opensuse-11-2-and-fonts
+comments: true
 categories:
 - suse
 - fonts

@@ -2,6 +2,7 @@
 layout: post
 title: Немного про дизайн
 permalink: /2012/04/about-blog-design
+comments: true
 categories:
 - me
 - blog

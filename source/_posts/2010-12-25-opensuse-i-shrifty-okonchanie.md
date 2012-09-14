@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-12-25T14:01:59+0000
 permalink: /2010/12/opensuse-i-shrifty-okonchanie
+comments: true
 categories:
 - suse
 - fonts

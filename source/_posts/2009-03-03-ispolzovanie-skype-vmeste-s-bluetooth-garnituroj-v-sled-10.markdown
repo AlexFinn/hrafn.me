@@ -2,6 +2,7 @@
 layout: post
 title: Использование Skype вместе с Bluetooth-гарнитурой в SLED 10
 permalink: /2009/03/ispolzovanie-skype-vmeste-s-bluetooth-garnituroj-v-sled-10
+comments: true
 categories:
 - suse
 - skype

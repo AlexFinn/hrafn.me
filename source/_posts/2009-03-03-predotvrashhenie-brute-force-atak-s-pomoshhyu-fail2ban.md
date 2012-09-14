@@ -2,6 +2,7 @@
 layout: post
 title: Предотвращение Brute Force атак с помощью fail2ban
 permalink: /2009/03/predotvrashhenie-brute-force-atak-s-pomoshhyu-fail2ban
+comments: true
 categories:
 - security
 - fail2ban

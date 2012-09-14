@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2009-08-24T19:42:12+0400
 permalink: /2009/08/vasha-os-mozhet-sdelat-eto
+comments: true
 categories:
 - suse
 - susestudio

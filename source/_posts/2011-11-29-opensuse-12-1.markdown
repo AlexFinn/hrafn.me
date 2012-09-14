@@ -3,6 +3,7 @@ layout: post
 title: openSUSE 12.1
 date: 2011-11-29T19:37:54+0000
 permalink: /2011/11/opensuse-12-1
+comments: true
 categories:
 - suse
 - me

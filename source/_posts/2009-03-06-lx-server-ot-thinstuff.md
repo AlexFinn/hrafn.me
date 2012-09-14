@@ -2,6 +2,7 @@
 layout: post
 title: LX Server от Thinstuff
 permalink: /2009/03/lx-server-ot-thinstuff
+comments: true
 categories:
 - thinstuff
 - rdp

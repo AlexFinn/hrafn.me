@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-06-20T18:21:05+0000
 permalink: /2010/06/antialiasing-and-fonts-in-browsers
+comments: true
 categories:
 - fonts
 - browser

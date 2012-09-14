@@ -3,6 +3,7 @@ layout: post
 title: VariCAD Manuals
 author: hrafn
 permalink: /2009/01/varicad-manuals
+comments: true
 categories:
 - varicad
 - docs

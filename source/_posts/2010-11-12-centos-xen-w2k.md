@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-11-12T10:43:59+0000
 permalink: /2010/11/centos-xen-w2k
+comments: true
 categories:
 - win2k
 - xen

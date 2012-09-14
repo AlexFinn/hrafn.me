@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-06-07T13:50:41+0000
 permalink: /2010/06/f13-nouveau-i-compiz
+comments: true
 categories:
 - fedora
 - nvidia

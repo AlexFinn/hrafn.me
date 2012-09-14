@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-01-12T13:45:32+0000
 permalink: /2010/01/ejabberd-rpc-failed-on-the-node
+comments: true
 categories:
 - ejabberd
 - failed

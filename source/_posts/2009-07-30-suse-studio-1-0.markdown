@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2009-07-30T18:08:46+0400
 permalink: /2009/07/suse-studio-1-0
+comments: true
 categories:
 - susestudio
 - suse

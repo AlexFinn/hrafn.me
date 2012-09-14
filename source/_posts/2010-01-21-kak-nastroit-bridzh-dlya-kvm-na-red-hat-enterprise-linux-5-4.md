@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-01-21T12:02:01+0000
 permalink: /2010/01/kak-nastroit-bridzh-dlya-kvm-na-red-hat-enterprise-linux-5-4
+comments: true
 categories:
 - kvm
 - virtualization

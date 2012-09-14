@@ -2,6 +2,7 @@
 layout: post
 title: SSH Proxying
 permalink: /2009/03/ssh-proxying
+comments: true
 categories:
 - ssh
 - proxy

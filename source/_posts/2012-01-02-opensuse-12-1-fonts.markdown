@@ -3,6 +3,7 @@ layout: post
 title: Отображение шрифтов в openSUSE 12.1
 author: hrafn
 permalink: /2012/01/opensuse-12-1-fonts
+comments: true
 categories:
 - fonts
 - suse

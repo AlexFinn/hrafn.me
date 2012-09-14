@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-11-10T21:54:38+0000
 permalink: /2010/11/red-hat-rhel6
+comments: true
 categories:
 - rhel
 - redhat

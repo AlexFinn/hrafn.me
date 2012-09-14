@@ -2,6 +2,7 @@
 layout: post
 title: SLED 10 SP2 Addons CD
 permalink: /2009/03/sled-10-sp2-addons-cd
+comments: true
 categories:
 - suse
 ---

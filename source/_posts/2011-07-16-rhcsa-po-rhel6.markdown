@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2011-07-16T12:46:35+0000
 permalink: /2011/07/rhcsa-po-rhel6
+comments: true
 categories:
 - redhat
 - certification

@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2009-08-24T17:43:49+0400
 permalink: /2009/08/suse-studio-zapuskaem-linux-v-brauzere
+comments: true
 categories:
 - suse
 - susestudio

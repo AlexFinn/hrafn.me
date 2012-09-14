@@ -2,6 +2,7 @@
 layout: post
 title: Создание разделов с помощью fdisk
 permalink: /2009/03/sozdanie-razdelov-s-pomoshhyu-fdisk
+comments: true
 categories:
 - fdisk
 - howto

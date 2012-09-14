@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2011-01-24T12:45:53+0000
 permalink: /articles/spacewalk-intro
+comments: true
 categories:
 - management
 - spacewalk

@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2009-12-07T14:13:02+0300
 permalink: /2009/12/wi-fi-bcm4311-i-sled11
+comments: true
 categories:
 - suse
 - wifi

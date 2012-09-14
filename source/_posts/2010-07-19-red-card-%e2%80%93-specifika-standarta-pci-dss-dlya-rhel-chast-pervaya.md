@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-07-19T12:40:40+0000
 permalink: /2010/07/red-card-specifika-standarta-pci-dss-dlya-rhel-chast-pervaya
+comments: true
 categories:
 - rhel
 - pci dss

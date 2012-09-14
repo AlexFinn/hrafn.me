@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2011-06-10T19:20:00+0000
 permalink: /2011/06/bridge-kvm-again
+comments: true
 categories:
 - kvm
 - virsh

@@ -3,6 +3,7 @@ layout: post
 title: Смена движка блога прошла успешно
 author: alexfinn
 permalink: /2011/12/change-blog-engine
+comments: true
 categories:
 - jekyll
 - code

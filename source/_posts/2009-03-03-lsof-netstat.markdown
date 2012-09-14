@@ -2,6 +2,7 @@
 layout: post
 title: lsof and netstat
 permalink: /2009/03/lsof-netstat
+comments: true
 categories:
 - lsof
 - netstat

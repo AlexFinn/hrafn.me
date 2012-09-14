@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2009-06-22T13:21:14+0400
 permalink: /2009/06/stop-ssh-brute-force-attack-using-susefirewall
+comments: true
 categories:
 - security
 - suse

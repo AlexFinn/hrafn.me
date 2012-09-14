@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2009-04-23T23:43:34+0400
 permalink: /2009/04/broadcom-wireless-drivers-dlya-sled-11
+comments: true
 categories:
 - suse
 - wifi

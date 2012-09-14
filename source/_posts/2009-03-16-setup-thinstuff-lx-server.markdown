@@ -1,10 +1,9 @@
 ---
 layout: post
 title: Установка Thinstuff LX Server
-author: hrafn
-published: true
 date: 2009-03-16T12:22:03+0300
 permalink: /articles/setup-thinstuff-lx-server
+comments: true
 categories:
 - thinstuff
 - howto

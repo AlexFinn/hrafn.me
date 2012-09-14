@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-05-05T11:36:00+0000
 permalink: /2010/05/kerberos-dlya-integracii-v-ad
+comments: true
 categories:
 - AD
 - kerberos

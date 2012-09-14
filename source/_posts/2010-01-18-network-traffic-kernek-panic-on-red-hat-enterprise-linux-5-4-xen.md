@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-01-18T15:41:20+0000
 permalink: /2010/01/network-traffic-kernel-panic-on-red-hat-enterprise-linux-5-4-xen
+comments: true
 categories:
 - rhel
 - xen

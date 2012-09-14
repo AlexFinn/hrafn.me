@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2009-06-06T13:10:22+0400
 permalink: /2009/06/montirovanie-obshhix-resursov-i-dostup-k-nim-iz-komandnoj-stroki
+comments: true
 categories:
 - share
 - howto

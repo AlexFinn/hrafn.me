@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2010-12-02T12:56:18+0000
 permalink: /2010/12/fedora-14-oshibka-pri-sozdanii-virtualnoj-mashiny
+comments: true
 categories:
 - fedora
 - virtualization

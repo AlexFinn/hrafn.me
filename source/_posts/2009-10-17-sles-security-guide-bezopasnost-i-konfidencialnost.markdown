@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2009-10-17T02:17:51+0400
 permalink: /2009/10/sles-security-guide-bezopasnost-i-konfidencialnost
+comments: true
 categories:
 - suse
 - security

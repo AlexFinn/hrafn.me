@@ -5,6 +5,7 @@ author: hrafn
 published: true
 date: 2009-12-04T13:06:28+0300
 permalink: /2009/10/oshibki-pri-obnovlenii-ili-registracii
+comments: true
 categories:
 - suse
 - registration
