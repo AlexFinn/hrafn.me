@@ -25,8 +25,9 @@ article{
 		color: #1d1d1d;
 		text-align: justify;
 		a{
+			text-decoration: underline;
 			&:hover{
-				text-decoration: underline;
+				text-shadow: 0px 0px 1px #000;
 			}
 		}
 		.more-link{
