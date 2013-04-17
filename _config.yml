@@ -77,7 +77,7 @@ google_plus_one_size: medium
 
 # Google Plus Profile
 # Hidden: No visible button, just add author information to search results
-googleplus_user: 103291489173191931572
+googleplus_user: 
 googleplus_hidden: false
 
 # Pinboard
@@ -96,7 +96,7 @@ disqus_show_comment_count: false
 google_analytics_tracking_id:
 
 # Gaug.es App Analytics
-gauges_analytics_tracking_id:
+gauges_analytics_tracking_id: 4e0acf24613f5d2e97000002
 
 # Facebook Like
 facebook_like: false
